@@ -10,9 +10,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * The entity allowing interaction with the roles table.
@@ -32,7 +31,6 @@ public class Role
     /**
      * The name (String) of the role. Cannot be null and must be unique.
      */
-    @NotNull
     @Column(nullable = false,
             unique = true)
     private String name;
@@ -43,10 +41,10 @@ public class Role
      * connects roles to the user role combination
      */
     @OneToMany(mappedBy = "role",
-            cascade = CascadeType.ALL)
-    @JsonIgnoreProperties(value = "role",
-            allowSetters = true)
-    private List<UserRoles> users = new ArrayList<>();
+            cascade = CascadeType.ALL,
+            orphanRemoval = true)
+    @JsonIgnoreProperties(value = "role", allowSetters = true)
+    private Set<UserRoles> users = new HashSet<>();
 
     /**
      * Default Constructor used primarily by the JPA.
@@ -92,13 +90,7 @@ public class Role
      */
     public String getName()
     {
-        if (name == null)
-        {
-            return null;
-        } else
-        {
-            return name.toUpperCase();
-        }
+        return name;
     }
 
     /**
@@ -116,7 +108,7 @@ public class Role
      *
      * @return A list of user role combinations associated with this role
      */
-    public List<UserRoles> getUsers()
+    public Set<UserRoles> getUsers()
     {
         return users;
     }
@@ -126,18 +118,8 @@ public class Role
      *
      * @param users Change the list of user role combinations associated with this role to this one
      */
-    public void setUsers(List<UserRoles> users)
+    public void setUsers(Set<UserRoles> users)
     {
         this.users = users;
     }
-
-    /**
-     * Commented out audit field getter
-     *
-     * @return the username (String) of the user who last modified this role
-     */
-    //    public String getLastModifiedBy()
-    //    {
-    //        return lastModifiedBy;
-    //    }
 }

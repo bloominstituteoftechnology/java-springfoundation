@@ -11,7 +11,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.Email;
-import javax.validation.constraints.NotNull;
 
 /**
  * The entity allowing interaction with the useremails table
@@ -34,7 +33,6 @@ public class Useremail
      * Email (String) for this user. Cannot be nullable.
      * Must be in the format userid@domain.upperLevelDomain
      */
-    @NotNull
     @Column(nullable = false)
     @Email
     private String useremail;
@@ -47,11 +45,9 @@ public class Useremail
      * A user can have many emails.
      */
     @ManyToOne
-    @NotNull
     @JoinColumn(name = "userid",
             nullable = false)
-    @JsonIgnoreProperties(value = "useremails",
-            allowSetters = true)
+    @JsonIgnoreProperties(value = "useremails", allowSetters = true)
     private User user;
 
     /**
@@ -102,13 +98,7 @@ public class Useremail
      */
     public String getUseremail()
     {
-        if (useremail == null) // this is possible when updating a user
-        {
-            return null;
-        } else
-        {
-            return useremail.toLowerCase();
-        }
+        return useremail;
     }
 
     /**

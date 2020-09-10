@@ -42,21 +42,21 @@ public class SimpleCorsFilter
         //                 response.setHeader("Access-Control-Allow-Origin",
         //            "https://lambdaschool.com/");
         response.setHeader("Access-Control-Allow-Origin",
-                           "*");
+                "*");
 
         // white list http methods that can be used with this API. * says lets them all work! To restrict access use something like
         //        response.setHeader("Access-Control-Allow-Methods", "POST, PUT, GET, OPTIONS, DELETE");
         response.setHeader("Access-Control-Allow-Methods",
-                           "*");
+                "*");
 
         // while list access headers that can be used with this API. * says lets them all work! To restrict access use something like
         //        response.setHeader("Access-Control-Allow-Headers", "x-requested-with, authorization, content-type, access_token");
         response.setHeader("Access-Control-Allow-Headers",
-                           "*");
+                "*");
 
         // maximum seconds results can be cached
         response.setHeader("Access-Control-Max-Age",
-                           "3600");
+                "3600");
 
         if (HttpMethod.OPTIONS.name()
                 .equalsIgnoreCase(request.getMethod()))
@@ -65,7 +65,7 @@ public class SimpleCorsFilter
         } else
         {
             filterChain.doFilter(servletRequest,
-                                 servletResponse);
+                    servletResponse);
         }
     }
 }

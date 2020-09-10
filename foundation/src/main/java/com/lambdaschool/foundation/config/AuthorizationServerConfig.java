@@ -102,7 +102,7 @@ public class AuthorizationServerConfig
                 .withClient(CLIENT_ID)
                 .secret(encoder.encode(CLIENT_SECRET))
                 .authorizedGrantTypes(GRANT_TYPE_PASSWORD,
-                                      AUTHORIZATION_CODE)
+                        AUTHORIZATION_CODE)
                 .scopes(SCOPE_READ,
                         SCOPE_WRITE,
                         TRUST)
@@ -126,6 +126,6 @@ public class AuthorizationServerConfig
                 .authenticationManager(authenticationManager);
         // here instead of our clients requesting authentication at the endpoint /oauth/token, they request it at the endpoint /login
         endpoints.pathMapping("/oauth/token",
-                              "/login");
+                "/login");
     }
 }

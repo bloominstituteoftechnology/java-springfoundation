@@ -35,4 +35,5 @@ public interface RoleRepository
             String uname,
             long roleid,
             String name);
+
 }

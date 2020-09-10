@@ -1,7 +1,5 @@
 package com.lambdaschool.foundation.services;
 
-import com.lambdaschool.foundation.exceptions.ResourceNotFoundException;
-import com.lambdaschool.foundation.handlers.HelperFunctions;
 import com.lambdaschool.foundation.models.User;
 import com.lambdaschool.foundation.models.Useremail;
 import com.lambdaschool.foundation.repository.UseremailRepository;
@@ -9,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.lambdaschool.foundation.exceptions.ResourceNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,7 +32,7 @@ public class UseremailServiceImpl
     private UserService userService;
 
     @Autowired
-    private HelperFunctions helper;
+    private HelperFunctions helperFunctions;
 
     @Override
     public List<Useremail> findAll()
@@ -61,12 +60,12 @@ public class UseremailServiceImpl
     public void delete(long id)
     {
         if (useremailrepos.findById(id)
-                .isPresent())
+            .isPresent())
         {
-            if (helper.isAuthorizedToMakeChange(useremailrepos.findById(id)
-                                                        .get()
-                                                        .getUser()
-                                                        .getUsername()))
+            if (helperFunctions.isAuthorizedToMakeChange(useremailrepos.findById(id)
+                .get()
+                .getUser()
+                .getUsername()))
             {
                 useremailrepos.deleteById(id);
             }
@@ -83,12 +82,12 @@ public class UseremailServiceImpl
             String emailaddress)
     {
         if (useremailrepos.findById(useremailid)
-                .isPresent())
+            .isPresent())
         {
-            if (helper.isAuthorizedToMakeChange(useremailrepos.findById(useremailid)
-                                                        .get()
-                                                        .getUser()
-                                                        .getUsername()))
+            if (helperFunctions.isAuthorizedToMakeChange(useremailrepos.findById(useremailid)
+                .get()
+                .getUser()
+                .getUsername()))
             {
                 Useremail useremail = findUseremailById(useremailid);
                 useremail.setUseremail(emailaddress.toLowerCase());
@@ -113,10 +112,10 @@ public class UseremailServiceImpl
     {
         User currentUser = userService.findUserById(userid);
 
-        if (helper.isAuthorizedToMakeChange(currentUser.getUsername()))
+        if (helperFunctions.isAuthorizedToMakeChange(currentUser.getUsername()))
         {
             Useremail newUserEmail = new Useremail(currentUser,
-                                                   emailaddress);
+                emailaddress);
             return useremailrepos.save(newUserEmail);
         } else
         {
@@ -124,11 +123,5 @@ public class UseremailServiceImpl
             // to recognize that this exception can be thrown
             throw new ResourceNotFoundException("This user is not authorized to make change");
         }
-    }
-
-    @Override
-    public List<Useremail> findByUserName(String username)
-    {
-        return useremailrepos.findAllByUser_Username(username.toLowerCase());
     }
 }

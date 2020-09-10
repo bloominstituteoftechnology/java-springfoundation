@@ -1,6 +1,6 @@
 package com.lambdaschool.foundation.services;
 
-import com.lambdaschool.foundation.FoundationApplication;
+import com.lambdaschool.foundation.UserModelApplication;
 import com.lambdaschool.foundation.exceptions.ResourceNotFoundException;
 import com.lambdaschool.foundation.models.Role;
 import com.lambdaschool.foundation.models.User;
@@ -19,12 +19,10 @@ import org.springframework.security.test.context.support.WithUserDetails;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
-
 import static junit.framework.TestCase.assertEquals;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes = FoundationApplication.class)
+@SpringBootTest(classes = UserModelApplication.class)
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class UserServiceImplTest
 {
@@ -105,8 +103,11 @@ public class UserServiceImplTest
     @Test
     public void F_save()
     {
-        ArrayList<UserRoles> datas = new ArrayList<>();
-        User u2 = new User("tiger", "ILuvMath!", "tiger@school.lambda", datas);
+        Role r2 = new Role("user");
+        r2.setRoleid(2);
+
+        User u2 = new User("tiger", "ILuvMath!", "tiger@school.lambda");
+        u2.getRoles().add(new UserRoles(u2, r2));
         u2.getUseremails()
                 .add(new Useremail(u2, "tiger@tiger.local"));
 
@@ -126,8 +127,12 @@ public class UserServiceImplTest
     @Test
     public void G_update()
     {
-        ArrayList<UserRoles> datas = new ArrayList<>();
-        User u2 = new User("cinnamon", "password", "cinnamon@school.lambda", datas);
+        Role r2 = new Role("user");
+        r2.setRoleid(2);
+
+        User u2 = new User("cinnamon", "password", "cinnamon@school.lambda");
+        u2.getRoles().add(new UserRoles(u2, r2));
+
         u2.getUseremails()
                 .add(new Useremail(u2, "cinnamon@mymail.thump"));
         u2.getUseremails()
@@ -154,9 +159,10 @@ public class UserServiceImplTest
     public void GB_updateNotCurrentUserNorAdmin()
     {
         Role r2 = new Role("user");
+        r2.setRoleid(2);
 
-        ArrayList<UserRoles> datas = new ArrayList<>();
-        User u2 = new User("cinnamon", "password", "cinnamon@school.lambda", datas);
+        User u2 = new User("cinnamon", "password", "cinnamon@school.lambda");
+        u2.getRoles().add(new UserRoles(u2, r2));
         u2.getUseremails()
                 .add(new Useremail(u2, "cinnamon@mymail.thump"));
         u2.getUseremails()
@@ -175,29 +181,5 @@ public class UserServiceImplTest
         assertEquals("bunny@email.thump", updatedu2.getUseremails()
                 .get(checking)
                 .getUseremail());
-    }
-
-    @Test(expected = ResourceNotFoundException.class)
-    public void HA_deleteUserRoleRoleNotFound()
-    {
-        userService.deleteUserRole(7, 50);
-    }
-
-    @Test(expected = ResourceNotFoundException.class)
-    public void HB_deleteUserRoleUserNotFound()
-    {
-        userService.deleteUserRole(50, 2);
-    }
-
-    @Test(expected = ResourceNotFoundException.class)
-    public void IC_addUserRoleRoleNotFound()
-    {
-        userService.addUserRole(7, 50);
-    }
-
-    @Test(expected = ResourceNotFoundException.class)
-    public void ID_addUserRoleUserNotFound()
-    {
-        userService.addUserRole(50, 2);
     }
 }

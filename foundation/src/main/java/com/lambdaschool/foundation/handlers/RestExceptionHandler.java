@@ -3,6 +3,7 @@ package com.lambdaschool.foundation.handlers;
 import com.lambdaschool.foundation.exceptions.ResourceFoundException;
 import com.lambdaschool.foundation.exceptions.ResourceNotFoundException;
 import com.lambdaschool.foundation.models.ErrorDetail;
+import com.lambdaschool.foundation.services.HelperFunctions;
 import org.springframework.beans.ConversionNotSupportedException;
 import org.springframework.beans.TypeMismatchException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,7 +48,7 @@ public class RestExceptionHandler
      * Connects this class with the Helper Functions
      */
     @Autowired
-    private HelperFunctions helper;
+    private HelperFunctions helperFunctions;
 
     /**
      * The constructor for the RestExceptionHandler. Currently we do not do anything special. We just call the parent constructor.
@@ -73,7 +74,7 @@ public class RestExceptionHandler
         errorDetail.setDetail(rnfe.getMessage());
         errorDetail.setDeveloperMessage(rnfe.getClass()
                                                 .getName());
-        errorDetail.setErrors(helper.getConstraintViolation(rnfe));
+        errorDetail.setErrors(helperFunctions.getConstraintViolation(rnfe));
 
         return new ResponseEntity<>(errorDetail,
                                     null,
@@ -96,7 +97,7 @@ public class RestExceptionHandler
         errorDetail.setDetail(rfe.getMessage());
         errorDetail.setDeveloperMessage(rfe.getClass()
                                                 .getName());
-        errorDetail.setErrors(helper.getConstraintViolation(rfe));
+        errorDetail.setErrors(helperFunctions.getConstraintViolation(rfe));
 
         return new ResponseEntity<>(errorDetail,
                                     null,
@@ -128,7 +129,7 @@ public class RestExceptionHandler
         errorDetail.setDetail(ex.getMessage());
         errorDetail.setDeveloperMessage(ex.getClass()
                                                 .getName());
-        errorDetail.setErrors(helper.getConstraintViolation(ex));
+        errorDetail.setErrors(helperFunctions.getConstraintViolation(ex));
 
         return new ResponseEntity<>(errorDetail,
                                     null,
@@ -162,7 +163,7 @@ public class RestExceptionHandler
         errorDetail.setTitle("Incorrect method: " + ex.getMethod());
         errorDetail.setDetail("Path: " + request.getDescription(false) + " | Supported Methods are: " + Arrays.toString(ex.getSupportedMethods()));
         errorDetail.setDeveloperMessage("HTTP Method Not Valid for Endpoint (check for valid URI and proper HTTP Method)");
-        errorDetail.setErrors(helper.getConstraintViolation(ex));
+        errorDetail.setErrors(helperFunctions.getConstraintViolation(ex));
 
         return new ResponseEntity<>(errorDetail,
                                     null,
@@ -191,7 +192,7 @@ public class RestExceptionHandler
         errorDetail.setTitle("Incorrect content type: " + ex.getContentType());
         errorDetail.setDetail("Path: " + request.getDescription(false) + " | Supported Content / Media Types are: " + ex.getSupportedMediaTypes());
         errorDetail.setDeveloperMessage("Content / Media Type Not Valid for Endpoint (check for valid URI and proper content / media type)");
-        errorDetail.setErrors(helper.getConstraintViolation(ex));
+        errorDetail.setErrors(helperFunctions.getConstraintViolation(ex));
 
         return new ResponseEntity<>(errorDetail,
                                     null,
@@ -222,7 +223,7 @@ public class RestExceptionHandler
         errorDetail.setTitle("Unacceptable content type: " + ex.getMessage());
         errorDetail.setDetail("Path: " + request.getDescription(false) + " | Supported Content / Media Types are: " + ex.getSupportedMediaTypes());
         errorDetail.setDeveloperMessage("Content / Media Type Not Valid for Endpoint (check for valid URI and proper content / media type)");
-        errorDetail.setErrors(helper.getConstraintViolation(ex));
+        errorDetail.setErrors(helperFunctions.getConstraintViolation(ex));
 
         return new ResponseEntity<>(errorDetail,
                                     null,
@@ -252,7 +253,7 @@ public class RestExceptionHandler
         errorDetail.setDetail(ex.getMessage());
         errorDetail.setDeveloperMessage(ex.getClass()
                                                 .getName());
-        errorDetail.setErrors(helper.getConstraintViolation(ex));
+        errorDetail.setErrors(helperFunctions.getConstraintViolation(ex));
 
         return new ResponseEntity<>(errorDetail,
                                     null,
@@ -281,7 +282,7 @@ public class RestExceptionHandler
         errorDetail.setTitle("Parameter Missing for " + "Path: " + request.getDescription(false));
         errorDetail.setDetail("Parameter Missing: " + ex.getParameterName() + " Type: " + ex.getParameterType());
         errorDetail.setDeveloperMessage(ex.getMessage() + " " + ex.getClass());
-        errorDetail.setErrors(helper.getConstraintViolation(ex));
+        errorDetail.setErrors(helperFunctions.getConstraintViolation(ex));
 
         return new ResponseEntity<>(errorDetail,
                                     null,
@@ -311,7 +312,7 @@ public class RestExceptionHandler
         errorDetail.setDetail(ex.getMessage());
         errorDetail.setDeveloperMessage(ex.getClass()
                                                 .getName());
-        errorDetail.setErrors(helper.getConstraintViolation(ex));
+        errorDetail.setErrors(helperFunctions.getConstraintViolation(ex));
 
         return new ResponseEntity<>(errorDetail,
                                     null,
@@ -341,7 +342,7 @@ public class RestExceptionHandler
         errorDetail.setDetail(ex.getMessage());
         errorDetail.setDeveloperMessage(ex.getClass()
                                                 .getName() + " " + ex.getMostSpecificCause());
-        errorDetail.setErrors(helper.getConstraintViolation(ex));
+        errorDetail.setErrors(helperFunctions.getConstraintViolation(ex));
 
         return new ResponseEntity<>(errorDetail,
                                     null,
@@ -371,7 +372,7 @@ public class RestExceptionHandler
         errorDetail.setDetail(ex.getMessage());
         errorDetail.setDeveloperMessage(ex.getClass()
                                                 .getName() + " " + ex.getMostSpecificCause());
-        errorDetail.setErrors(helper.getConstraintViolation(ex));
+        errorDetail.setErrors(helperFunctions.getConstraintViolation(ex));
 
         return new ResponseEntity<>(errorDetail,
                                     null,
@@ -401,7 +402,7 @@ public class RestExceptionHandler
         errorDetail.setDetail(ex.getMessage());
         errorDetail.setDeveloperMessage(ex.getClass()
                                                 .getName() + " " + ex.getMostSpecificCause());
-        errorDetail.setErrors(helper.getConstraintViolation(ex));
+        errorDetail.setErrors(helperFunctions.getConstraintViolation(ex));
 
         return new ResponseEntity<>(errorDetail,
                                     null,
@@ -431,7 +432,7 @@ public class RestExceptionHandler
         errorDetail.setDetail(ex.getMessage());
         errorDetail.setDeveloperMessage(ex.getClass()
                                                 .getName() + " " + ex.getMostSpecificCause());
-        errorDetail.setErrors(helper.getConstraintViolation(ex));
+        errorDetail.setErrors(helperFunctions.getConstraintViolation(ex));
 
         return new ResponseEntity<>(errorDetail,
                                     null,
@@ -461,7 +462,7 @@ public class RestExceptionHandler
         errorDetail.setDetail(request.getDescription(false) + " | parameter: " + ex.getParameter());
         errorDetail.setDeveloperMessage(ex.getBindingResult()
                                                 .toString());
-        errorDetail.setErrors(helper.getConstraintViolation(ex));
+        errorDetail.setErrors(helperFunctions.getConstraintViolation(ex));
 
         return new ResponseEntity<>(errorDetail,
                                     null,
@@ -491,7 +492,7 @@ public class RestExceptionHandler
         errorDetail.setDetail("Request Part Name: " + ex.getRequestPartName() + " | " + ex.getMessage());
         errorDetail.setDeveloperMessage(ex.getClass()
                                                 .getName());
-        errorDetail.setErrors(helper.getConstraintViolation(ex));
+        errorDetail.setErrors(helperFunctions.getConstraintViolation(ex));
 
         return new ResponseEntity<>(errorDetail,
                                     null,
@@ -521,7 +522,7 @@ public class RestExceptionHandler
         errorDetail.setDetail(ex.getMessage());
         errorDetail.setDeveloperMessage(ex.getClass()
                                                 .getName() + " " + ex.getBindingResult());
-        errorDetail.setErrors(helper.getConstraintViolation(ex));
+        errorDetail.setErrors(helperFunctions.getConstraintViolation(ex));
 
         return new ResponseEntity<>(errorDetail,
                                     null,
@@ -554,7 +555,7 @@ public class RestExceptionHandler
         errorDetail.setTitle("Rest Endpoint Not Valid");
         errorDetail.setDetail(request.getDescription(false));
         errorDetail.setDeveloperMessage("Rest Handler Not Found (check for valid URI)");
-        errorDetail.setErrors(helper.getConstraintViolation(ex));
+        errorDetail.setErrors(helperFunctions.getConstraintViolation(ex));
 
         return new ResponseEntity<>(errorDetail,
                                     null,
@@ -583,7 +584,7 @@ public class RestExceptionHandler
         errorDetail.setTitle("Async Request Timeout Error");
         errorDetail.setDetail("path: " + webRequest.getDescription(false));
         errorDetail.setDeveloperMessage(ex.getMessage());
-        errorDetail.setErrors(helper.getConstraintViolation(ex));
+        errorDetail.setErrors(helperFunctions.getConstraintViolation(ex));
 
         return new ResponseEntity<>(errorDetail,
                                     null,

@@ -26,7 +26,9 @@ import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * The class allows access to endpoints that are open to all users regardless of authentication status.
@@ -74,7 +76,7 @@ public class OpenController
         newuser.setPrimaryemail(newminuser.getPrimaryemail());
 
         // add the default role of user
-        List<UserRoles> newRoles = new ArrayList<>();
+        Set<UserRoles> newRoles = new HashSet<>();
         newRoles.add(new UserRoles(newuser,
                                    roleService.findByName("user")));
         newuser.setRoles(newRoles);
@@ -92,14 +94,7 @@ public class OpenController
         // return the access token
         // To get the access token, surf to the endpoint /login just as if a client had done this.
         RestTemplate restTemplate = new RestTemplate();
-
-        // You cannot use a port when on Heroku
-        String port = "";
-        if (httpServletRequest.getServerName().equalsIgnoreCase("localhost"))
-        {
-            port = ":" + httpServletRequest.getLocalPort();
-        }
-        String requestURI = "http://" + httpServletRequest.getServerName() + port + "/login";
+        String requestURI = "http://" + httpServletRequest.getServerName() + ":" + httpServletRequest.getLocalPort() + "/login";
 
         List<MediaType> acceptableMediaTypes = new ArrayList<>();
         acceptableMediaTypes.add(MediaType.APPLICATION_JSON);
@@ -108,7 +103,7 @@ public class OpenController
         headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
         headers.setAccept(acceptableMediaTypes);
         headers.setBasicAuth(System.getenv("OAUTHCLIENTID"),
-                             System.getenv("OAUTHCLIENTSECRET"));
+                System.getenv("OAUTHCLIENTSECRET"));
 
         MultiValueMap<String, String> map = new LinkedMultiValueMap<>();
         map.add("grant_type",
@@ -121,15 +116,15 @@ public class OpenController
                 newminuser.getPassword());
 
         HttpEntity<MultiValueMap<String, String>> request = new HttpEntity<>(map,
-                                                                             headers);
+                headers);
 
         String theToken = restTemplate.postForObject(requestURI,
-                                                     request,
-                                                     String.class);
+                request,
+                String.class);
 
         return new ResponseEntity<>(theToken,
-                                    responseHeaders,
-                                    HttpStatus.CREATED);
+                responseHeaders,
+                HttpStatus.CREATED);
     }
 
     /**

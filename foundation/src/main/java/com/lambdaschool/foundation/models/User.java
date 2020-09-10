@@ -3,8 +3,6 @@ package com.lambdaschool.foundation.models;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
@@ -17,16 +15,14 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Email;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * The entity allowing interaction with the users table
  */
-@ApiModel(value = "User",
-        description = "Yes, this is an actual user")
 @Entity
 @Table(name = "users")
 public class User
@@ -35,10 +31,6 @@ public class User
     /**
      * The primary key (long) of the users table.
      */
-    @ApiModelProperty(name = "user id",
-            value = "primary key for User",
-            required = true,
-            example = "1")
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long userid;
@@ -46,14 +38,6 @@ public class User
     /**
      * The username (String). Cannot be null and must be unique
      */
-    @ApiModelProperty(name = "User Name",
-            value = "Actual user name for sign on",
-            required = true,
-            example = "Some Name")
-    @Size(min = 2,
-            max = 30,
-            message = "User Name must be between 2 and 30 characters")
-    @NotNull
     @Column(nullable = false,
             unique = true)
     private String username;
@@ -61,13 +45,6 @@ public class User
     /**
      * The password (String) for this user. Cannot be null. Never get displayed
      */
-    @ApiModelProperty(name = "password",
-            value = "The password for this user",
-            required = true,
-            example = "ILuvM4th!")
-    @Size(min = 4,
-            message = "Password must 4 or more characters")
-    @NotNull
     @Column(nullable = false)
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String password;
@@ -75,36 +52,29 @@ public class User
     /**
      * Primary email account of user. Could be used as the userid. Cannot be null and must be unique.
      */
-    @ApiModelProperty(name = "primary email",
-            value = "The email for this user",
-            required = true,
-            example = "john@lambdaschool.com")
-    @NotNull
     @Column(nullable = false,
             unique = true)
     @Email
     private String primaryemail;
 
-    @ApiModelProperty(name = "user emails",
-            value = "List of user emails for this users")
+    /**
+     * A list of emails for this user
+     */
     @OneToMany(mappedBy = "user",
             cascade = CascadeType.ALL,
             orphanRemoval = true)
-    @JsonIgnoreProperties(value = "user",
-            allowSetters = true)
+    @JsonIgnoreProperties(value = "user", allowSetters = true)
     private List<Useremail> useremails = new ArrayList<>();
 
     /**
      * Part of the join relationship between user and role
      * connects users to the user role combination
      */
-    @ApiModelProperty(name = "roles",
-            value = "List of user roles for this users")
     @OneToMany(mappedBy = "user",
-            cascade = CascadeType.ALL)
-    @JsonIgnoreProperties(value = "user",
-            allowSetters = true)
-    private List<UserRoles> roles = new ArrayList<>();
+            cascade = CascadeType.ALL,
+            orphanRemoval = true)
+    @JsonIgnoreProperties(value = "user", allowSetters = true)
+    private Set<UserRoles> roles = new HashSet<>();
 
     /**
      * Default constructor used primarily by the JPA.
@@ -121,22 +91,15 @@ public class User
      * @param username     The username (String) of the user
      * @param password     The password (String) of the user
      * @param primaryemail The primary email (String) of the user
-     * @param userRoles    The list of roles (userroles) assigned to this user
      */
     public User(
             String username,
             String password,
-            String primaryemail,
-            List<UserRoles> userRoles)
+            String primaryemail)
     {
         setUsername(username);
         setPassword(password);
-        setPrimaryemail(primaryemail);
-        for (UserRoles ur : userRoles)
-        {
-            ur.setUser(this);
-        }
-        this.roles = userRoles;
+        this.primaryemail = primaryemail;
     }
 
     /**
@@ -166,13 +129,7 @@ public class User
      */
     public String getUsername()
     {
-        if (username == null) // this is possible when updating a user
-        {
-            return null;
-        } else
-        {
-            return username.toLowerCase();
-        }
+        return username;
     }
 
     /**
@@ -192,13 +149,7 @@ public class User
      */
     public String getPrimaryemail()
     {
-        if (primaryemail == null) // this is possible when updating a user
-        {
-            return null;
-        } else
-        {
-            return primaryemail.toLowerCase();
-        }
+        return primaryemail;
     }
 
     /**
@@ -265,7 +216,7 @@ public class User
      *
      * @return A list of user role combinations associated with this user
      */
-    public List<UserRoles> getRoles()
+    public Set<UserRoles> getRoles()
     {
         return roles;
     }
@@ -275,20 +226,9 @@ public class User
      *
      * @param roles Change the list of user role combinations associated with this user to this one
      */
-    public void setRoles(List<UserRoles> roles)
+    public void setRoles(Set<UserRoles> roles)
     {
         this.roles = roles;
-    }
-
-    /**
-     * Add one role to this user
-     *
-     * @param role the new role (Role) to add
-     */
-    public void addRole(Role role)
-    {
-        roles.add(new UserRoles(this,
-                                role));
     }
 
     /**

@@ -2,6 +2,8 @@ package com.lambdaschool.foundation.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
+import springfox.bean.validators.configuration.BeanValidatorPluginsConfiguration;
 import springfox.documentation.builders.ApiInfoBuilder;
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
@@ -16,6 +18,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
  */
 @Configuration
 @EnableSwagger2
+@Import(BeanValidatorPluginsConfiguration.class)
 public class Swagger2Config
 {
     /**
@@ -32,7 +35,6 @@ public class Swagger2Config
                               .basePackage("com.lambdaschool.usermodel"))
                 .paths(PathSelectors.regex("/.*"))
                 .build()
-                .useDefaultResponseMessages(false) // Allows only my exception responses
                 .apiInfo(apiEndPointsInfo());
     }
 

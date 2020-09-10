@@ -41,7 +41,7 @@ public class LogoutController
         {
             // find the token
             String tokenValue = authHeader.replace("Bearer",
-                                                   "")
+                    "")
                     .trim();
             // and remove it!
             OAuth2AccessToken accessToken = tokenStore.readAccessToken(tokenValue);

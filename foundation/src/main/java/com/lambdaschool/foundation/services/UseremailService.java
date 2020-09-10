@@ -55,13 +55,4 @@ public interface UseremailService
     Useremail save(
             long userid,
             String emailaddress);
-
-    /**
-     * Return a list of user email combinations based on the given username
-     *
-     * @param username The username of the user email combinations you seek
-     * @return A list of user email combinations based on the given username
-     */
-    List<Useremail> findByUserName(String username);
 }
-

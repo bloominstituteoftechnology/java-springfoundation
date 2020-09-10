@@ -40,8 +40,7 @@ public class H2ServerConfiguration
      */
     @Bean
     @ConditionalOnExpression("${h2.tcp.enabled:true}")
-    public Server h2TcpServer()
-            throws
+    public Server h2TcpServer() throws
             SQLException
     {
         return Server.createTcpServer("-tcp",
@@ -61,8 +60,7 @@ public class H2ServerConfiguration
      */
     @Bean
     @ConditionalOnExpression("${h2.web.enabled:true}")
-    public Server h2WebServer()
-            throws
+    public Server h2WebServer() throws
             SQLException
     {
         return Server.createWebServer("-web",

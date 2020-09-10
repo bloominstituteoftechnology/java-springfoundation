@@ -9,10 +9,10 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.lambdaschool</groupId>
-    <artifactId>foundation</artifactId>
+    <artifactId>usermodel</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>foundation</name>
-    <description>A Starting project for Spring Boot</description>
+    <name>usermodel</name>
+    <description>Demo project for Spring Boot</description>
 
     <properties>
         <java.version>14</java.version>
@@ -29,7 +29,6 @@
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
 
-        <!--        DevTools can cause some console messages to appear twice!-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-devtools</artifactId>
@@ -41,11 +40,6 @@
             <groupId>com.h2database</groupId>
             <artifactId>h2</artifactId>
             <!--            <scope>runtime</scope>-->
-        </dependency>
-
-        <dependency>
-            <groupId>org.postgresql</groupId>
-            <artifactId>postgresql</artifactId>
         </dependency>
 
         <dependency>
@@ -112,32 +106,11 @@
     </dependencies>
 
     <build>
-        <finalName>jrmmba-foundation</finalName>
-
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
-
-            <!-- Heroku Maven Plugin Configuration -->
-            <plugin>
-                <groupId>com.heroku.sdk</groupId>
-                <artifactId>heroku-maven-plugin</artifactId>
-                <version>3.0.2</version>
-                <configuration>
-                    <appName>${project.build.finalName}</appName>
-                    <includeTarget>false</includeTarget>
-                    <includes>
-                        <include>${project.build.directory}/${project.build.finalName}.jar</include>
-                    </includes>
-                    <jdkVersion>${java.version}</jdkVersion>
-                    <processTypes>
-                        <web>java $JAVA_OPTS -Dserver.port=$PORT -jar target/${project.build.finalName}.jar</web>
-                    </processTypes>
-                </configuration>
-            </plugin>
-
         </plugins>
     </build>
 

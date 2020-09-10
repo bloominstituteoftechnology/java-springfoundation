@@ -4,12 +4,11 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.IdClass;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.persistence.UniqueConstraint;
 import java.io.Serializable;
-import java.util.Objects;
 
 /**
  * The entity allowing interaction with the userroles table.
@@ -22,8 +21,8 @@ import java.util.Objects;
  * When you implement Serializable you must implement equals and hash code
  */
 @Entity
-@Table(name = "userroles",
-        uniqueConstraints = {@UniqueConstraint(columnNames = {"userid", "roleid"})})
+@Table(name = "userroles")
+@IdClass(UserRolesId.class)
 public class UserRoles
         extends Auditable
         implements Serializable
@@ -35,8 +34,7 @@ public class UserRoles
     @Id
     @ManyToOne
     @JoinColumn(name = "userid")
-    @JsonIgnoreProperties(value = "roles",
-            allowSetters = true)
+    @JsonIgnoreProperties(value = "roles", allowSetters = true)
     private User user;
 
     /**
@@ -46,8 +44,7 @@ public class UserRoles
     @Id
     @ManyToOne
     @JoinColumn(name = "roleid")
-    @JsonIgnoreProperties(value = "users",
-            allowSetters = true)
+    @JsonIgnoreProperties(value = "users", allowSetters = true)
     private Role role;
 
     /**
@@ -118,19 +115,19 @@ public class UserRoles
         {
             return true;
         }
-        if (o == null || getClass() != o.getClass())
+        if (!(o instanceof UserRoles))
         {
             return false;
         }
-        UserRoles userRoles = (UserRoles) o;
-        return getUser().equals(userRoles.getUser()) &&
-                getRole().equals(userRoles.getRole());
+        UserRoles that = (UserRoles) o;
+        return ((user == null) ? 0 : user.getUserid()) == ((that.user == null) ? 0 : that.user.getUserid()) &&
+                ((role == null) ? 0 : role.getRoleid()) == ((that.role == null) ? 0 : that.role.getRoleid());
     }
 
     @Override
     public int hashCode()
     {
-        return Objects.hash(getUser(),
-                            getRole());
+        // return Objects.hash(user.getUserid(), role.getRoleid());
+        return 37;
     }
 }
