@@ -2,12 +2,11 @@ package com.lambdaschool.foundation.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.oauth2.common.OAuth2AccessToken;
 import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.GetMapping;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -31,21 +30,22 @@ public class LogoutController
      * @param request the Http request from which we find the authorization header which includes the token to be removed
      */
     // yes, both endpoints are mapped to the same Java method! So, either one will work.
-    @RequestMapping(value = {"/oauth/revoke-token", "/logout"},
-            method = RequestMethod.GET)
-    @ResponseStatus(HttpStatus.OK)
-    public void logoutSelf(HttpServletRequest request)
+    @GetMapping(value = {"/oauth/revoke-token", "/logout"},
+        produces = "application/json")
+    public ResponseEntity<?> logoutSelf(HttpServletRequest request)
     {
         String authHeader = request.getHeader("Authorization");
         if (authHeader != null)
         {
             // find the token
             String tokenValue = authHeader.replace("Bearer",
-                    "")
-                    .trim();
+                "")
+                .trim();
             // and remove it!
             OAuth2AccessToken accessToken = tokenStore.readAccessToken(tokenValue);
             tokenStore.removeAccessToken(accessToken);
         }
+
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 }

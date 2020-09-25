@@ -46,6 +46,7 @@ public class UserServiceImpl
     @Override
     public List<User> findByNameContaining(String username)
     {
+
         return userrepos.findByUsernameContainingIgnoreCase(username.toLowerCase());
     }
 
@@ -87,6 +88,7 @@ public class UserServiceImpl
     @Override
     public User save(User user)
     {
+
         User newUser = new User();
 
         if (user.getUserid() != 0)
@@ -133,6 +135,8 @@ public class UserServiceImpl
     {
         User currentUser = findUserById(id);
 
+        // update own thing
+        // admin update
         if (helperFunctions.isAuthorizedToMakeChange(currentUser.getUsername()))
         {
             if (user.getUsername() != null)

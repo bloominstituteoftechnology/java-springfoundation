@@ -14,7 +14,7 @@ import java.util.Optional;
  */
 @Component
 public class UserAuditing
-        implements AuditorAware<String>
+    implements AuditorAware<String>
 {
     /**
      * The current user
@@ -26,7 +26,7 @@ public class UserAuditing
     {
         String uname;
         Authentication authentication = SecurityContextHolder.getContext()
-                .getAuthentication();
+            .getAuthentication();
         if (authentication != null)
         {
             uname = authentication.getName();

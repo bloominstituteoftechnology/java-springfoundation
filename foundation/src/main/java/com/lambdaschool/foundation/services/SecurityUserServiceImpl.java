@@ -17,7 +17,7 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Service(value = "securityUserService")
 public class SecurityUserServiceImpl
-        implements UserDetailsService
+    implements UserDetailsService
 {
     /**
      * Ties this implementation to the User Repository so we can find a user in the database.
@@ -35,8 +35,8 @@ public class SecurityUserServiceImpl
     @Transactional
     @Override
     public UserDetails loadUserByUsername(String s)
-            throws
-            ResourceNotFoundException
+        throws
+        ResourceNotFoundException
     {
         User user = userrepos.findByUsername(s.toLowerCase());
         if (user == null)
@@ -44,7 +44,7 @@ public class SecurityUserServiceImpl
             throw new ResourceNotFoundException("Invalid username or password.");
         }
         return new org.springframework.security.core.userdetails.User(user.getUsername(),
-                user.getPassword(),
-                user.getAuthority());
+            user.getPassword(),
+            user.getAuthority());
     }
 }

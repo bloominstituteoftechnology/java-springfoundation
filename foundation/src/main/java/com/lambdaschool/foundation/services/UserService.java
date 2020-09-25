@@ -72,8 +72,8 @@ public interface UserService
      * @return the complete user object that got updated
      */
     User update(
-            User user,
-            long id);
+        User user,
+        long id);
 
     /**
      * Deletes all record and their associated records from the database

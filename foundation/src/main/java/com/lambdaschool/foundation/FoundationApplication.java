@@ -11,7 +11,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
  */
 @EnableJpaAuditing
 @SpringBootApplication
-public class UserModelApplication
+public class FoundationApplication
 {
     /**
      * Connect to the system environment where environment variables live.
@@ -51,8 +51,11 @@ public class UserModelApplication
 
         if (!stop)
         {
-            SpringApplication.run(UserModelApplication.class,
+            SpringApplication.run(FoundationApplication.class,
                 args);
+        } else
+        {
+            System.out.println("Environment Variables NOT SET: OAUTHCLIENTID and / or OAUTHCLIENTSECRET");
         }
     }
 }

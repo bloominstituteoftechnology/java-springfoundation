@@ -8,7 +8,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  */
 // @EnableJpaAuditing
 @SpringBootApplication
-public class UserModelApplication
+public class FoundationApplication
 {
     /**
      * Main method to start the application.
@@ -17,7 +17,7 @@ public class UserModelApplication
      */
     public static void main(String[] args)
     {
-        SpringApplication.run(UserModelApplication.class,
-                              args);
+        SpringApplication.run(FoundationApplication.class,
+            args);
     }
 }

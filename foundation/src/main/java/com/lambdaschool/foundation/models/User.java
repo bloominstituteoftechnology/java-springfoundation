@@ -6,15 +6,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.Email;
+import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -26,7 +20,7 @@ import java.util.Set;
 @Entity
 @Table(name = "users")
 public class User
-        extends Auditable
+    extends Auditable
 {
     /**
      * The primary key (long) of the users table.
@@ -38,22 +32,22 @@ public class User
     /**
      * The username (String). Cannot be null and must be unique
      */
-    @Column(nullable = false,
-            unique = true)
+    @NotNull
+    @Column(unique = true)
     private String username;
 
     /**
      * The password (String) for this user. Cannot be null. Never get displayed
      */
-    @Column(nullable = false)
+    @NotNull
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String password;
 
     /**
      * Primary email account of user. Could be used as the userid. Cannot be null and must be unique.
      */
-    @Column(nullable = false,
-            unique = true)
+    @NotNull
+    @Column(unique = true)
     @Email
     private String primaryemail;
 
@@ -61,9 +55,10 @@ public class User
      * A list of emails for this user
      */
     @OneToMany(mappedBy = "user",
-            cascade = CascadeType.ALL,
-            orphanRemoval = true)
-    @JsonIgnoreProperties(value = "user", allowSetters = true)
+        cascade = CascadeType.ALL,
+        orphanRemoval = true)
+    @JsonIgnoreProperties(value = "user",
+        allowSetters = true)
     private List<Useremail> useremails = new ArrayList<>();
 
     /**
@@ -71,9 +66,10 @@ public class User
      * connects users to the user role combination
      */
     @OneToMany(mappedBy = "user",
-            cascade = CascadeType.ALL,
-            orphanRemoval = true)
-    @JsonIgnoreProperties(value = "user", allowSetters = true)
+        cascade = CascadeType.ALL,
+        orphanRemoval = true)
+    @JsonIgnoreProperties(value = "user",
+        allowSetters = true)
     private Set<UserRoles> roles = new HashSet<>();
 
     /**
@@ -93,9 +89,9 @@ public class User
      * @param primaryemail The primary email (String) of the user
      */
     public User(
-            String username,
-            String password,
-            String primaryemail)
+        String username,
+        String password,
+        String primaryemail)
     {
         setUsername(username);
         setPassword(password);
@@ -245,8 +241,8 @@ public class User
         for (UserRoles r : this.roles)
         {
             String myRole = "ROLE_" + r.getRole()
-                    .getName()
-                    .toUpperCase();
+                .getName()
+                .toUpperCase();
             rtnList.add(new SimpleGrantedAuthority(myRole));
         }
 

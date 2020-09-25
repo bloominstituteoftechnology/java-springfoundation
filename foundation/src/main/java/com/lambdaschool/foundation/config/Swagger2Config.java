@@ -30,12 +30,12 @@ public class Swagger2Config
     public Docket api()
     {
         return new Docket(DocumentationType.SWAGGER_2)
-                .select()
-                .apis(RequestHandlerSelectors
-                              .basePackage("com.lambdaschool.usermodel"))
-                .paths(PathSelectors.regex("/.*"))
-                .build()
-                .apiInfo(apiEndPointsInfo());
+            .select()
+            .apis(RequestHandlerSelectors
+                .basePackage("com.lambdaschool.foundation"))
+            .paths(PathSelectors.regex("/.*"))
+            .build()
+            .apiInfo(apiEndPointsInfo());
     }
 
     /**
@@ -45,14 +45,14 @@ public class Swagger2Config
      */
     private ApiInfo apiEndPointsInfo()
     {
-        return new ApiInfoBuilder().title("User Model Example")
-                .description("User Model Example")
-                .contact(new Contact("John Mitchell",
-                                     "http://www.lambdaschool.com",
-                                     "john@lambdaschool.com"))
-                .license("MIT")
-                .licenseUrl("https://github.com/LambdaSchool/java-usermodel/blob/master/LICENSE")
-                .version("1.0.0")
-                .build();
+        return new ApiInfoBuilder().title("Java Spring BE Foundation")
+            .description("Java Spring Backend Foundation and Scaffolding")
+            .contact(new Contact("John Mitchell",
+                "http://www.lambdaschool.com",
+                "john@lambdaschool.com"))
+            .license("MIT")
+            .licenseUrl("https://github.com/LambdaSchool/java-springfoundation/blob/master/LICENSE")
+            .version("1.0.0")
+            .build();
     }
 }

@@ -1,5 +1,6 @@
 package com.lambdaschool.foundation.services;
 
+import com.lambdaschool.foundation.exceptions.ResourceNotFoundException;
 import com.lambdaschool.foundation.models.User;
 import com.lambdaschool.foundation.models.Useremail;
 import com.lambdaschool.foundation.repository.UseremailRepository;
@@ -7,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.lambdaschool.foundation.exceptions.ResourceNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,7 +17,7 @@ import java.util.List;
 @Transactional
 @Service(value = "useremailService")
 public class UseremailServiceImpl
-        implements UseremailService
+    implements UseremailService
 {
     /**
      * Connects this service to the Useremail model
@@ -43,8 +43,8 @@ public class UseremailServiceImpl
          * iterate over the iterator set and add each element to an array list.
          */
         useremailrepos.findAll()
-                .iterator()
-                .forEachRemaining(list::add);
+            .iterator()
+            .forEachRemaining(list::add);
         return list;
     }
 
@@ -52,7 +52,7 @@ public class UseremailServiceImpl
     public Useremail findUseremailById(long id)
     {
         return useremailrepos.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Useremail with id " + id + " Not Found!"));
+            .orElseThrow(() -> new ResourceNotFoundException("Useremail with id " + id + " Not Found!"));
     }
 
     @Transactional
@@ -78,8 +78,8 @@ public class UseremailServiceImpl
     @Transactional
     @Override
     public Useremail update(
-            long useremailid,
-            String emailaddress)
+        long useremailid,
+        String emailaddress)
     {
         if (useremailrepos.findById(useremailid)
             .isPresent())
@@ -107,8 +107,8 @@ public class UseremailServiceImpl
     @Transactional
     @Override
     public Useremail save(
-            long userid,
-            String emailaddress)
+        long userid,
+        String emailaddress)
     {
         User currentUser = userService.findUserById(userid);
 
