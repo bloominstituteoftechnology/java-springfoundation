@@ -1,0 +1,8 @@
+com.lambdaschool.foundation
+com.lambdaschool.foundation.config
+com.lambdaschool.foundation.controllers
+com.lambdaschool.foundation.exceptions
+com.lambdaschool.foundation.handlers
+com.lambdaschool.foundation.models
+com.lambdaschool.foundation.repository
+com.lambdaschool.foundation.services
