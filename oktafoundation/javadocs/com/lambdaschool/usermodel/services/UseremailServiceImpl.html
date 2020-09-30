@@ -6,7 +6,7 @@
 <title>UseremailServiceImpl</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta name="dc.created" content="2020-07-22">
-<meta name="description" content="declaration: package: com.lambdaschool.foundation.services, class: UseremailServiceImpl">
+<meta name="description" content="declaration: package: com.lambdaschool.oktafoundation.services, class: UseremailServiceImpl">
 <meta name="generator" content="javadoc/ClassWriterImpl">
 <link rel="stylesheet" type="text/css" href="../../../../stylesheet.css" title="Style">
 <link rel="stylesheet" type="text/css" href="../../../../script-dir/jquery-ui.css" title="Style">
@@ -83,24 +83,24 @@ loadScripts(document, 'script');</script>
 <main role="main">
 <!-- ======== START OF CLASS DATA ======== -->
 <div class="header">
-<div class="subTitle"><span class="packageLabelInType">Package</span>&nbsp;<a href="package-summary.html">com.lambdaschool.foundation.services</a></div>
+<div class="subTitle"><span class="packageLabelInType">Package</span>&nbsp;<a href="package-summary.html">com.lambdaschool.oktafoundation.services</a></div>
 <h1 title="Class UseremailServiceImpl" class="title">Class UseremailServiceImpl</h1>
 </div>
 <div class="contentContainer">
 <div class="inheritance" title="Inheritance Tree">java.lang.Object
-<div class="inheritance">com.lambdaschool.foundation.services.UseremailServiceImpl</div>
+<div class="inheritance">com.lambdaschool.oktafoundation.services.UseremailServiceImpl</div>
 </div>
 <section class="description">
 <dl>
 <dt>All Implemented Interfaces:</dt>
-<dd><code><a href="UseremailService.html" title="interface in com.lambdaschool.foundation.services">UseremailService</a></code></dd>
+<dd><code><a href="UseremailService.html" title="interface in com.lambdaschool.oktafoundation.services">UseremailService</a></code></dd>
 </dl>
 <hr>
 <pre>@Transactional
 @Service("useremailService")
 public class <span class="typeNameLabel">UseremailServiceImpl</span>
 extends java.lang.Object
-implements <a href="UseremailService.html" title="interface in com.lambdaschool.foundation.services">UseremailService</a></pre>
+implements <a href="UseremailService.html" title="interface in com.lambdaschool.oktafoundation.services">UseremailService</a></pre>
 <div class="block">Implements the UseremailService Interface</div>
 </section>
 <section class="summary">
@@ -156,21 +156,21 @@ implements <a href="UseremailService.html" title="interface in com.lambdaschool.
 </td>
 </tr>
 <tr class="rowColor" id="i1">
-<td class="colFirst"><code>java.util.List&lt;<a href="../models/Useremail.html" title="class in com.lambdaschool.foundation.models">Useremail</a>&gt;</code></td>
+<td class="colFirst"><code>java.util.List&lt;<a href="../models/Useremail.html" title="class in com.lambdaschool.oktafoundation.models">Useremail</a>&gt;</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#findAll()">findAll</a></span>()</code></th>
 <td class="colLast">
 <div class="block">Returns a list of all users and their emails</div>
 </td>
 </tr>
 <tr class="altColor" id="i2">
-<td class="colFirst"><code><a href="../models/Useremail.html" title="class in com.lambdaschool.foundation.models">Useremail</a></code></td>
+<td class="colFirst"><code><a href="../models/Useremail.html" title="class in com.lambdaschool.oktafoundation.models">Useremail</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#findUseremailById(long)">findUseremailById</a></span>&#8203;(long&nbsp;id)</code></th>
 <td class="colLast">
 <div class="block">Returns the user email combination associated with the given id</div>
 </td>
 </tr>
 <tr class="rowColor" id="i3">
-<td class="colFirst"><code><a href="../models/Useremail.html" title="class in com.lambdaschool.foundation.models">Useremail</a></code></td>
+<td class="colFirst"><code><a href="../models/Useremail.html" title="class in com.lambdaschool.oktafoundation.models">Useremail</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#save(long,java.lang.String)">save</a></span>&#8203;(long&nbsp;userid,
 java.lang.String&nbsp;emailaddress)</code></th>
 <td class="colLast">
@@ -178,7 +178,7 @@ java.lang.String&nbsp;emailaddress)</code></th>
 </td>
 </tr>
 <tr class="altColor" id="i4">
-<td class="colFirst"><code><a href="../models/Useremail.html" title="class in com.lambdaschool.foundation.models">Useremail</a></code></td>
+<td class="colFirst"><code><a href="../models/Useremail.html" title="class in com.lambdaschool.oktafoundation.models">Useremail</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#update(long,java.lang.String)">update</a></span>&#8203;(long&nbsp;useremailid,
 java.lang.String&nbsp;emailaddress)</code></th>
 <td class="colLast">
@@ -226,12 +226,12 @@ java.lang.String&nbsp;emailaddress)</code></th>
 <li class="blockList">
 <section class="detail">
 <h3><a id="findAll()">findAll</a></h3>
-<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">java.util.List&lt;<a href="../models/Useremail.html" title="class in com.lambdaschool.foundation.models">Useremail</a>&gt;</span>&nbsp;<span class="memberName">findAll</span>()</div>
+<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">java.util.List&lt;<a href="../models/Useremail.html" title="class in com.lambdaschool.oktafoundation.models">Useremail</a>&gt;</span>&nbsp;<span class="memberName">findAll</span>()</div>
 <div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="UseremailService.html#findAll()">UseremailService</a></code></span></div>
 <div class="block">Returns a list of all users and their emails</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="UseremailService.html#findAll()">findAll</a></code>&nbsp;in interface&nbsp;<code><a href="UseremailService.html" title="interface in com.lambdaschool.foundation.services">UseremailService</a></code></dd>
+<dd><code><a href="UseremailService.html#findAll()">findAll</a></code>&nbsp;in interface&nbsp;<code><a href="UseremailService.html" title="interface in com.lambdaschool.oktafoundation.services">UseremailService</a></code></dd>
 <dt><span class="returnLabel">Returns:</span></dt>
 <dd>List of users and their emails</dd>
 </dl>
@@ -240,12 +240,12 @@ java.lang.String&nbsp;emailaddress)</code></th>
 <li class="blockList">
 <section class="detail">
 <h3><a id="findUseremailById(long)">findUseremailById</a></h3>
-<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType"><a href="../models/Useremail.html" title="class in com.lambdaschool.foundation.models">Useremail</a></span>&nbsp;<span class="memberName">findUseremailById</span>&#8203;(<span class="arguments">long&nbsp;id)</span></div>
+<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType"><a href="../models/Useremail.html" title="class in com.lambdaschool.oktafoundation.models">Useremail</a></span>&nbsp;<span class="memberName">findUseremailById</span>&#8203;(<span class="arguments">long&nbsp;id)</span></div>
 <div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="UseremailService.html#findUseremailById(long)">UseremailService</a></code></span></div>
 <div class="block">Returns the user email combination associated with the given id</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="UseremailService.html#findUseremailById(long)">findUseremailById</a></code>&nbsp;in interface&nbsp;<code><a href="UseremailService.html" title="interface in com.lambdaschool.foundation.services">UseremailService</a></code></dd>
+<dd><code><a href="UseremailService.html#findUseremailById(long)">findUseremailById</a></code>&nbsp;in interface&nbsp;<code><a href="UseremailService.html" title="interface in com.lambdaschool.oktafoundation.services">UseremailService</a></code></dd>
 <dt><span class="paramLabel">Parameters:</span></dt>
 <dd><code>id</code> - The primary key (long) of the user email combination you seek</dd>
 <dt><span class="returnLabel">Returns:</span></dt>
@@ -262,7 +262,7 @@ java.lang.String&nbsp;emailaddress)</code></th>
 <div class="block">Remove the user email combination referenced by the given id</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="UseremailService.html#delete(long)">delete</a></code>&nbsp;in interface&nbsp;<code><a href="UseremailService.html" title="interface in com.lambdaschool.foundation.services">UseremailService</a></code></dd>
+<dd><code><a href="UseremailService.html#delete(long)">delete</a></code>&nbsp;in interface&nbsp;<code><a href="UseremailService.html" title="interface in com.lambdaschool.oktafoundation.services">UseremailService</a></code></dd>
 <dt><span class="paramLabel">Parameters:</span></dt>
 <dd><code>id</code> - The primary key (long) of the user email combination you seek</dd>
 </dl>
@@ -272,13 +272,13 @@ java.lang.String&nbsp;emailaddress)</code></th>
 <section class="detail">
 <h3><a id="update(long,java.lang.String)">update</a></h3>
 <div class="memberSignature"><span class="annotations">@Transactional
-</span><span class="modifiers">public</span>&nbsp;<span class="returnType"><a href="../models/Useremail.html" title="class in com.lambdaschool.foundation.models">Useremail</a></span>&nbsp;<span class="memberName">update</span>&#8203;(<span class="arguments">long&nbsp;useremailid,
+</span><span class="modifiers">public</span>&nbsp;<span class="returnType"><a href="../models/Useremail.html" title="class in com.lambdaschool.oktafoundation.models">Useremail</a></span>&nbsp;<span class="memberName">update</span>&#8203;(<span class="arguments">long&nbsp;useremailid,
 java.lang.String&nbsp;emailaddress)</span></div>
 <div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="UseremailService.html#update(long,java.lang.String)">UseremailService</a></code></span></div>
 <div class="block">Replaces the email of the user email combination you seek</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="UseremailService.html#update(long,java.lang.String)">update</a></code>&nbsp;in interface&nbsp;<code><a href="UseremailService.html" title="interface in com.lambdaschool.foundation.services">UseremailService</a></code></dd>
+<dd><code><a href="UseremailService.html#update(long,java.lang.String)">update</a></code>&nbsp;in interface&nbsp;<code><a href="UseremailService.html" title="interface in com.lambdaschool.oktafoundation.services">UseremailService</a></code></dd>
 <dt><span class="paramLabel">Parameters:</span></dt>
 <dd><code>useremailid</code> - The primary key (long) of the user email combination you seek</dd>
 <dd><code>emailaddress</code> - The new email address (String) for this user email combination</dd>
@@ -291,13 +291,13 @@ java.lang.String&nbsp;emailaddress)</span></div>
 <section class="detail">
 <h3><a id="save(long,java.lang.String)">save</a></h3>
 <div class="memberSignature"><span class="annotations">@Transactional
-</span><span class="modifiers">public</span>&nbsp;<span class="returnType"><a href="../models/Useremail.html" title="class in com.lambdaschool.foundation.models">Useremail</a></span>&nbsp;<span class="memberName">save</span>&#8203;(<span class="arguments">long&nbsp;userid,
+</span><span class="modifiers">public</span>&nbsp;<span class="returnType"><a href="../models/Useremail.html" title="class in com.lambdaschool.oktafoundation.models">Useremail</a></span>&nbsp;<span class="memberName">save</span>&#8203;(<span class="arguments">long&nbsp;userid,
 java.lang.String&nbsp;emailaddress)</span></div>
 <div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="UseremailService.html#save(long,java.lang.String)">UseremailService</a></code></span></div>
 <div class="block">Add a new User Email combination</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="UseremailService.html#save(long,java.lang.String)">save</a></code>&nbsp;in interface&nbsp;<code><a href="UseremailService.html" title="interface in com.lambdaschool.foundation.services">UseremailService</a></code></dd>
+<dd><code><a href="UseremailService.html#save(long,java.lang.String)">save</a></code>&nbsp;in interface&nbsp;<code><a href="UseremailService.html" title="interface in com.lambdaschool.oktafoundation.services">UseremailService</a></code></dd>
 <dt><span class="paramLabel">Parameters:</span></dt>
 <dd><code>userid</code> - the userid of the new user email combination</dd>
 <dd><code>emailaddress</code> - the email address of the new user email combination</dd>

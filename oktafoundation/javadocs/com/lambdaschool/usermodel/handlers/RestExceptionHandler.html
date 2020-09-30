@@ -6,7 +6,7 @@
 <title>RestExceptionHandler</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta name="dc.created" content="2020-07-22">
-<meta name="description" content="declaration: package: com.lambdaschool.foundation.handlers, class: RestExceptionHandler">
+<meta name="description" content="declaration: package: com.lambdaschool.oktafoundation.handlers, class: RestExceptionHandler">
 <meta name="generator" content="javadoc/ClassWriterImpl">
 <link rel="stylesheet" type="text/css" href="../../../../stylesheet.css" title="Style">
 <link rel="stylesheet" type="text/css" href="../../../../script-dir/jquery-ui.css" title="Style">
@@ -83,13 +83,13 @@ loadScripts(document, 'script');</script>
 <main role="main">
 <!-- ======== START OF CLASS DATA ======== -->
 <div class="header">
-<div class="subTitle"><span class="packageLabelInType">Package</span>&nbsp;<a href="package-summary.html">com.lambdaschool.foundation.handlers</a></div>
+<div class="subTitle"><span class="packageLabelInType">Package</span>&nbsp;<a href="package-summary.html">com.lambdaschool.oktafoundation.handlers</a></div>
 <h1 title="Class RestExceptionHandler" class="title">Class RestExceptionHandler</h1>
 </div>
 <div class="contentContainer">
 <div class="inheritance" title="Inheritance Tree">java.lang.Object
 <div class="inheritance">org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler
-<div class="inheritance">com.lambdaschool.foundation.handlers.RestExceptionHandler</div>
+<div class="inheritance">com.lambdaschool.oktafoundation.handlers.RestExceptionHandler</div>
 </div>
 </div>
 <section class="description">
@@ -306,14 +306,14 @@ org.springframework.web.context.request.WebRequest&nbsp;request)</code></th>
 </tr>
 <tr class="altColor" id="i14">
 <td class="colFirst"><code>org.springframework.http.ResponseEntity&lt;?&gt;</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#handleResourceFoundException(com.lambdaschool.usermodel.exceptions.ResourceFoundException)">handleResourceFoundException</a></span>&#8203;(<a href="../exceptions/ResourceFoundException.html" title="class in com.lambdaschool.foundation.exceptions">ResourceFoundException</a>&nbsp;rfe)</code></th>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#handleResourceFoundException(com.lambdaschool.usermodel.exceptions.ResourceFoundException)">handleResourceFoundException</a></span>&#8203;(<a href="../exceptions/ResourceFoundException.html" title="class in com.lambdaschool.oktafoundation.exceptions">ResourceFoundException</a>&nbsp;rfe)</code></th>
 <td class="colLast">
 <div class="block">Our custom handling of ResourceFoundExceptions.</div>
 </td>
 </tr>
 <tr class="rowColor" id="i15">
 <td class="colFirst"><code>org.springframework.http.ResponseEntity&lt;?&gt;</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#handleResourceNotFoundException(com.lambdaschool.usermodel.exceptions.ResourceNotFoundException)">handleResourceNotFoundException</a></span>&#8203;(<a href="../exceptions/ResourceNotFoundException.html" title="class in com.lambdaschool.foundation.exceptions">ResourceNotFoundException</a>&nbsp;rnfe)</code></th>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#handleResourceNotFoundException(com.lambdaschool.usermodel.exceptions.ResourceNotFoundException)">handleResourceNotFoundException</a></span>&#8203;(<a href="../exceptions/ResourceNotFoundException.html" title="class in com.lambdaschool.oktafoundation.exceptions">ResourceNotFoundException</a>&nbsp;rnfe)</code></th>
 <td class="colLast">
 <div class="block">Our custom handling of ResourceNotFoundExceptions.</div>
 </td>
@@ -385,8 +385,8 @@ org.springframework.web.context.request.WebRequest&nbsp;request)</code></th>
 <li class="blockList">
 <section class="detail">
 <h3><a id="handleResourceNotFoundException(com.lambdaschool.usermodel.exceptions.ResourceNotFoundException)">handleResourceNotFoundException</a></h3>
-<div class="memberSignature"><span class="annotations">@ExceptionHandler(<a href="../exceptions/ResourceNotFoundException.html" title="class in com.lambdaschool.foundation.exceptions">ResourceNotFoundException.class</a>)
-</span><span class="modifiers">public</span>&nbsp;<span class="returnType">org.springframework.http.ResponseEntity&lt;?&gt;</span>&nbsp;<span class="memberName">handleResourceNotFoundException</span>&#8203;(<span class="arguments"><a href="../exceptions/ResourceNotFoundException.html" title="class in com.lambdaschool.foundation.exceptions">ResourceNotFoundException</a>&nbsp;rnfe)</span></div>
+<div class="memberSignature"><span class="annotations">@ExceptionHandler(<a href="../exceptions/ResourceNotFoundException.html" title="class in com.lambdaschool.oktafoundation.exceptions">ResourceNotFoundException.class</a>)
+</span><span class="modifiers">public</span>&nbsp;<span class="returnType">org.springframework.http.ResponseEntity&lt;?&gt;</span>&nbsp;<span class="memberName">handleResourceNotFoundException</span>&#8203;(<span class="arguments"><a href="../exceptions/ResourceNotFoundException.html" title="class in com.lambdaschool.oktafoundation.exceptions">ResourceNotFoundException</a>&nbsp;rnfe)</span></div>
 <div class="block">Our custom handling of ResourceNotFoundExceptions. This gets thrown manually by our application.</div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
@@ -399,8 +399,8 @@ org.springframework.web.context.request.WebRequest&nbsp;request)</code></th>
 <li class="blockList">
 <section class="detail">
 <h3><a id="handleResourceFoundException(com.lambdaschool.usermodel.exceptions.ResourceFoundException)">handleResourceFoundException</a></h3>
-<div class="memberSignature"><span class="annotations">@ExceptionHandler(<a href="../exceptions/ResourceFoundException.html" title="class in com.lambdaschool.foundation.exceptions">ResourceFoundException.class</a>)
-</span><span class="modifiers">public</span>&nbsp;<span class="returnType">org.springframework.http.ResponseEntity&lt;?&gt;</span>&nbsp;<span class="memberName">handleResourceFoundException</span>&#8203;(<span class="arguments"><a href="../exceptions/ResourceFoundException.html" title="class in com.lambdaschool.foundation.exceptions">ResourceFoundException</a>&nbsp;rfe)</span></div>
+<div class="memberSignature"><span class="annotations">@ExceptionHandler(<a href="../exceptions/ResourceFoundException.html" title="class in com.lambdaschool.oktafoundation.exceptions">ResourceFoundException.class</a>)
+</span><span class="modifiers">public</span>&nbsp;<span class="returnType">org.springframework.http.ResponseEntity&lt;?&gt;</span>&nbsp;<span class="memberName">handleResourceFoundException</span>&#8203;(<span class="arguments"><a href="../exceptions/ResourceFoundException.html" title="class in com.lambdaschool.oktafoundation.exceptions">ResourceFoundException</a>&nbsp;rfe)</span></div>
 <div class="block">Our custom handling of ResourceFoundExceptions. This gets thrown manually by our application.</div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>

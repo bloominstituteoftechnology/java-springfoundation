@@ -6,7 +6,7 @@
 <title>SecurityUserServiceImpl</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta name="dc.created" content="2020-07-22">
-<meta name="description" content="declaration: package: com.lambdaschool.foundation.services, class: SecurityUserServiceImpl">
+<meta name="description" content="declaration: package: com.lambdaschool.oktafoundation.services, class: SecurityUserServiceImpl">
 <meta name="generator" content="javadoc/ClassWriterImpl">
 <link rel="stylesheet" type="text/css" href="../../../../stylesheet.css" title="Style">
 <link rel="stylesheet" type="text/css" href="../../../../script-dir/jquery-ui.css" title="Style">
@@ -83,12 +83,12 @@ loadScripts(document, 'script');</script>
 <main role="main">
 <!-- ======== START OF CLASS DATA ======== -->
 <div class="header">
-<div class="subTitle"><span class="packageLabelInType">Package</span>&nbsp;<a href="package-summary.html">com.lambdaschool.foundation.services</a></div>
+<div class="subTitle"><span class="packageLabelInType">Package</span>&nbsp;<a href="package-summary.html">com.lambdaschool.oktafoundation.services</a></div>
 <h1 title="Class SecurityUserServiceImpl" class="title">Class SecurityUserServiceImpl</h1>
 </div>
 <div class="contentContainer">
 <div class="inheritance" title="Inheritance Tree">java.lang.Object
-<div class="inheritance">com.lambdaschool.foundation.services.SecurityUserServiceImpl</div>
+<div class="inheritance">com.lambdaschool.oktafoundation.services.SecurityUserServiceImpl</div>
 </div>
 <section class="description">
 <dl>
@@ -197,7 +197,7 @@ implements org.springframework.security.core.userdetails.UserDetailsService</pre
 <h3><a id="loadUserByUsername(java.lang.String)">loadUserByUsername</a></h3>
 <div class="memberSignature"><span class="annotations">@Transactional
 </span><span class="modifiers">public</span>&nbsp;<span class="returnType">org.springframework.security.core.userdetails.UserDetails</span>&nbsp;<span class="memberName">loadUserByUsername</span>&#8203;(<span class="arguments">java.lang.String&nbsp;s)</span>
-                                                                             throws <span class="exceptions"><a href="../exceptions/ResourceNotFoundException.html" title="class in com.lambdaschool.foundation.exceptions">ResourceNotFoundException</a></span></div>
+                                                                             throws <span class="exceptions"><a href="../exceptions/ResourceNotFoundException.html" title="class in com.lambdaschool.oktafoundation.exceptions">ResourceNotFoundException</a></span></div>
 <div class="block">Verifies that the user is correct and if so creates the authenticated user</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
@@ -207,7 +207,7 @@ implements org.springframework.security.core.userdetails.UserDetailsService</pre
 <dt><span class="returnLabel">Returns:</span></dt>
 <dd>a security user detail that is now an authenticated user</dd>
 <dt><span class="throwsLabel">Throws:</span></dt>
-<dd><code><a href="../exceptions/ResourceNotFoundException.html" title="class in com.lambdaschool.foundation.exceptions">ResourceNotFoundException</a></code> - if the user name is not found</dd>
+<dd><code><a href="../exceptions/ResourceNotFoundException.html" title="class in com.lambdaschool.oktafoundation.exceptions">ResourceNotFoundException</a></code> - if the user name is not found</dd>
 </dl>
 </section>
 </li>

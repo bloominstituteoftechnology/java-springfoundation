@@ -1,8 +1,8 @@
-com.lambdaschool.foundation
-com.lambdaschool.foundation.config
-com.lambdaschool.foundation.controllers
-com.lambdaschool.foundation.exceptions
-com.lambdaschool.foundation.handlers
-com.lambdaschool.foundation.models
-com.lambdaschool.foundation.repository
-com.lambdaschool.foundation.services
+com.lambdaschool.oktafoundation
+com.lambdaschool.oktafoundation.config
+com.lambdaschool.oktafoundation.controllers
+com.lambdaschool.oktafoundation.exceptions
+com.lambdaschool.oktafoundation.handlers
+com.lambdaschool.oktafoundation.models
+com.lambdaschool.oktafoundation.repository
+com.lambdaschool.oktafoundation.services
