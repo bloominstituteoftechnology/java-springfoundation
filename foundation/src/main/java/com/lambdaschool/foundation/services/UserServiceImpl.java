@@ -1,10 +1,8 @@
 package com.lambdaschool.foundation.services;
 
 import com.lambdaschool.foundation.exceptions.ResourceNotFoundException;
-import com.lambdaschool.foundation.models.Role;
+import com.lambdaschool.foundation.models.Plants;
 import com.lambdaschool.foundation.models.User;
-import com.lambdaschool.foundation.models.UserRoles;
-import com.lambdaschool.foundation.models.Useremail;
 import com.lambdaschool.foundation.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -28,10 +26,10 @@ public class UserServiceImpl
     private UserRepository userrepos;
 
     /**
-     * Connects this service to the Role table
+     * Connects this service to the Plants table
      */
     @Autowired
-    private RoleService roleService;
+    private PlantService plantService;
 
     @Autowired
     private HelperFunctions helperFunctions;
@@ -108,11 +106,11 @@ public class UserServiceImpl
             .clear();
         for (UserRoles ur : user.getRoles())
         {
-            Role addRole = roleService.findRoleById(ur.getRole()
+            Plants addPlants = plantService.findRoleById(ur.getRole()
                 .getRoleid());
             newUser.getRoles()
                 .add(new UserRoles(newUser,
-                    addRole));
+                        addPlants));
         }
 
         newUser.getUseremails()
@@ -163,12 +161,12 @@ public class UserServiceImpl
                     .clear();
                 for (UserRoles ur : user.getRoles())
                 {
-                    Role addRole = roleService.findRoleById(ur.getRole()
+                    Plants addPlants = plantService.findRoleById(ur.getRole()
                         .getRoleid());
 
                     currentUser.getRoles()
                         .add(new UserRoles(currentUser,
-                            addRole));
+                                addPlants));
                 }
             }
 

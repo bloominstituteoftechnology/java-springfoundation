@@ -1,14 +1,10 @@
 package com.lambdaschool.foundation.controllers;
 
 import com.lambdaschool.foundation.models.User;
-import com.lambdaschool.foundation.models.UserMinimum;
-import com.lambdaschool.foundation.models.UserRoles;
-import com.lambdaschool.foundation.services.RoleService;
+import com.lambdaschool.foundation.services.PlantService;
 import com.lambdaschool.foundation.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -42,10 +38,10 @@ public class OpenController
     private UserService userService;
 
     /**
-     * A method in this controller adds a new user to the application with the role User so needs access to Role Services to do this.
+     * A method in this controller adds a new user to the application with the role User so needs access to Plants Services to do this.
      */
     @Autowired
-    private RoleService roleService;
+    private PlantService plantService;
 
     /**
      * This endpoint always anyone to create an account with the default role of USER. That role is hardcoded in this method.
@@ -76,7 +72,7 @@ public class OpenController
         // add the default role of user
         Set<UserRoles> newRoles = new HashSet<>();
         newRoles.add(new UserRoles(newuser,
-            roleService.findByName("user")));
+            plantService.findByName("user")));
         newuser.setRoles(newRoles);
 
         newuser = userService.save(newuser);

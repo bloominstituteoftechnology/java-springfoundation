@@ -36,19 +36,19 @@ Using the provided seed data, expand each endpoint below to see the output it ge
             "primaryemail": "admin@lambdaschool.local",
             "roles": [
                 {
-                    "role": {
+                    "plants": {
                         "roleid": 3,
                         "name": "DATA"
                     }
                 },
                 {
-                    "role": {
+                    "plants": {
                         "roleid": 1,
                         "name": "ADMIN"
                     }
                 },
                 {
-                    "role": {
+                    "plants": {
                         "roleid": 2,
                         "name": "USER"
                     }
@@ -65,19 +65,19 @@ Using the provided seed data, expand each endpoint below to see the output it ge
             "primaryemail": "admin@lambdaschool.local",
             "roles": [
                 {
-                    "role": {
+                    "plants": {
                         "roleid": 3,
                         "name": "DATA"
                     }
                 },
                 {
-                    "role": {
+                    "plants": {
                         "roleid": 1,
                         "name": "ADMIN"
                     }
                 },
                 {
-                    "role": {
+                    "plants": {
                         "roleid": 2,
                         "name": "USER"
                     }
@@ -94,13 +94,13 @@ Using the provided seed data, expand each endpoint below to see the output it ge
             "primaryemail": "cinnamon@lambdaschool.local",
             "roles": [
                 {
-                    "role": {
+                    "plants": {
                         "roleid": 2,
                         "name": "USER"
                     }
                 },
                 {
-                    "role": {
+                    "plants": {
                         "roleid": 3,
                         "name": "DATA"
                     }
@@ -117,13 +117,13 @@ Using the provided seed data, expand each endpoint below to see the output it ge
             "primaryemail": "cinnamon@lambdaschool.local",
             "roles": [
                 {
-                    "role": {
+                    "plants": {
                         "roleid": 2,
                         "name": "USER"
                     }
                 },
                 {
-                    "role": {
+                    "plants": {
                         "roleid": 3,
                         "name": "DATA"
                     }
@@ -140,13 +140,13 @@ Using the provided seed data, expand each endpoint below to see the output it ge
             "primaryemail": "cinnamon@lambdaschool.local",
             "roles": [
                 {
-                    "role": {
+                    "plants": {
                         "roleid": 2,
                         "name": "USER"
                     }
                 },
                 {
-                    "role": {
+                    "plants": {
                         "roleid": 3,
                         "name": "DATA"
                     }
@@ -163,7 +163,7 @@ Using the provided seed data, expand each endpoint below to see the output it ge
             "primaryemail": "barnbarn@lambdaschool.local",
             "roles": [
                 {
-                    "role": {
+                    "plants": {
                         "roleid": 2,
                         "name": "USER"
                     }
@@ -189,13 +189,13 @@ Using the provided seed data, expand each endpoint below to see the output it ge
         "primaryemail": "cinnamon@lambdaschool.local",
         "roles": [
             {
-                "role": {
+                "plants": {
                     "roleid": 2,
                     "name": "USER"
                 }
             },
             {
-                "role": {
+                "plants": {
                     "roleid": 3,
                     "name": "DATA"
                 }
@@ -243,13 +243,13 @@ Status OK
         "primaryemail": "cinnamon@lambdaschool.local",
         "roles": [
             {
-                "role": {
+                "plants": {
                     "roleid": 2,
                     "name": "USER"
                 }
             },
             {
-                "role": {
+                "plants": {
                     "roleid": 3,
                     "name": "DATA"
                 }
@@ -287,7 +287,7 @@ Location Header: http://localhost:2019/useremails/useremail/15
         "primaryemail": "misskitty@school.lambda",
         "roles": [
             {
-                "role": {
+                "plants": {
                     "roleid": 2,
                     "name": "USER"
                 }
@@ -449,7 +449,7 @@ Location Header: http://localhost:2019/useremails/useremail/15
 </details>
 
 <details>
-<summary>http://localhost:2019/roles/role/3</summary>
+<summary>http://localhost:2019/roles/plants/3</summary>
 
 ```JSON
 {
@@ -497,7 +497,7 @@ Location Header: http://localhost:2019/useremails/useremail/15
 </details>
 
 <details>
-<summary>http://localhost:2019/roles/role/name/data</summary>
+<summary>http://localhost:2019/roles/plants/name/data</summary>
 
 ```JSON
 {
@@ -545,7 +545,7 @@ Location Header: http://localhost:2019/useremails/useremail/15
 </details>
 
 <details>
-<summary>POST http://localhost:2019/roles/role</summary>
+<summary>POST http://localhost:2019/roles/plants</summary>
 
 DATA
 
@@ -560,13 +560,13 @@ OUTPUT
 ```TEXT
 Status CREATED
 
-Location Header: http://localhost:2019/roles/role/16
+Location Header: http://localhost:2019/roles/plants/16
 ```
 
 </details>
 
 <details>
-<summary>http://localhost:2019/roles/role/name/anewrole</summary>
+<summary>http://localhost:2019/roles/plants/name/anewrole</summary>
 
 ```JSON
 {
@@ -579,7 +579,7 @@ Location Header: http://localhost:2019/roles/role/16
 </details>
 
 <details>
-<summary>PUT http://localhost:2019/roles/role/16</summary>
+<summary>PUT http://localhost:2019/roles/plants/16</summary>
 
 DATA
 
@@ -620,19 +620,19 @@ Status OK
         ],
         "roles": [
             {
-                "role": {
+                "plants": {
                     "roleid": 3,
                     "name": "DATA"
                 }
             },
             {
-                "role": {
+                "plants": {
                     "roleid": 1,
                     "name": "ADMIN"
                 }
             },
             {
-                "role": {
+                "plants": {
                     "roleid": 2,
                     "name": "USER"
                 }
@@ -655,13 +655,13 @@ Status OK
         ],
         "roles": [
             {
-                "role": {
+                "plants": {
                     "roleid": 2,
                     "name": "USER"
                 }
             },
             {
-                "role": {
+                "plants": {
                     "roleid": 3,
                     "name": "DATA"
                 }
@@ -680,7 +680,7 @@ Status OK
         ],
         "roles": [
             {
-                "role": {
+                "plants": {
                     "roleid": 2,
                     "name": "USER"
                 }
@@ -694,7 +694,7 @@ Status OK
         "useremails": [],
         "roles": [
             {
-                "role": {
+                "plants": {
                     "roleid": 2,
                     "name": "USER"
                 }
@@ -713,7 +713,7 @@ Status OK
         ],
         "roles": [
             {
-                "role": {
+                "plants": {
                     "roleid": 2,
                     "name": "USER"
                 }
@@ -745,13 +745,13 @@ Status OK
     ],
     "roles": [
         {
-            "role": {
+            "plants": {
                 "roleid": 2,
                 "name": "USER"
             }
         },
         {
-            "role": {
+            "plants": {
                 "roleid": 3,
                 "name": "DATA"
             }
@@ -782,13 +782,13 @@ Status OK
     ],
     "roles": [
         {
-            "role": {
+            "plants": {
                 "roleid": 2,
                 "name": "USER"
             }
         },
         {
-            "role": {
+            "plants": {
                 "roleid": 3,
                 "name": "DATA"
             }
@@ -828,12 +828,12 @@ DATA
         ],
     "roles": [
         {
-            "role": {
+            "plants": {
                 "roleid": 1
             }
         },
         {
-            "role": {
+            "plants": {
                 "roleid": 2
             }
         }
@@ -877,12 +877,12 @@ DATA
         ],
     "roles": [
         {  
-            "role": {
+            "plants": {
                 "roleid": 3
             }
         },
         {  
-            "role": {
+            "plants": {
                 "roleid": 1
             }
         }
@@ -920,13 +920,13 @@ Status OK
     ],
     "roles": [
         {
-            "role": {
+            "plants": {
                 "roleid": 1,
                 "name": "ADMIN"
             }
         },
         {
-            "role": {
+            "plants": {
                 "roleid": 3,
                 "name": "DATA"
             }
@@ -996,13 +996,13 @@ Status OK
     ],
     "roles": [
         {
-            "role": {
+            "plants": {
                 "roleid": 2,
                 "name": "USER"
             }
         },
         {
-            "role": {
+            "plants": {
                 "roleid": 3,
                 "name": "DATA"
             }

@@ -3,11 +3,9 @@ package com.lambdaschool.foundation;
 import com.github.javafaker.Faker;
 import com.github.javafaker.service.FakeValuesService;
 import com.github.javafaker.service.RandomService;
-import com.lambdaschool.foundation.models.Role;
+import com.lambdaschool.foundation.models.Plants;
 import com.lambdaschool.foundation.models.User;
-import com.lambdaschool.foundation.models.UserRoles;
-import com.lambdaschool.foundation.models.Useremail;
-import com.lambdaschool.foundation.services.RoleService;
+import com.lambdaschool.foundation.services.PlantService;
 import com.lambdaschool.foundation.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -28,10 +26,10 @@ public class SeedData
     implements CommandLineRunner
 {
     /**
-     * Connects the Role Service to this process
+     * Connects the Plants Service to this process
      */
     @Autowired
-    RoleService roleService;
+    PlantService plantService;
 
     /**
      * Connects the user service to this process
@@ -54,14 +52,14 @@ public class SeedData
                                    Exception
     {
         userService.deleteAll();
-        roleService.deleteAll();
-        Role r1 = new Role("admin");
-        Role r2 = new Role("user");
-        Role r3 = new Role("data");
+        plantService.deleteAll();
+        Plants r1 = new Plants("admin");
+        Plants r2 = new Plants("user");
+        Plants r3 = new Plants("data");
 
-        r1 = roleService.save(r1);
-        r2 = roleService.save(r2);
-        r3 = roleService.save(r3);
+        r1 = plantService.save(r1);
+        r2 = plantService.save(r2);
+        r3 = plantService.save(r3);
 
         // admin, data, user
         User u1 = new User("admin",

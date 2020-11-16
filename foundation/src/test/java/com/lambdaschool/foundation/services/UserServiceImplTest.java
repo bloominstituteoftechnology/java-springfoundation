@@ -2,10 +2,8 @@ package com.lambdaschool.foundation.services;
 
 import com.lambdaschool.foundation.FoundationApplication;
 import com.lambdaschool.foundation.exceptions.ResourceNotFoundException;
-import com.lambdaschool.foundation.models.Role;
+import com.lambdaschool.foundation.models.Plants;
 import com.lambdaschool.foundation.models.User;
-import com.lambdaschool.foundation.models.UserRoles;
-import com.lambdaschool.foundation.models.Useremail;
 import com.lambdaschool.foundation.repository.UserRepository;
 import org.junit.After;
 import org.junit.Before;
@@ -51,11 +49,11 @@ public class UserServiceImplTest
     {
         userList = new ArrayList<>();
 
-        Role r1 = new Role("admin");
+        Plants r1 = new Plants("admin");
         r1.setRoleid(1);
-        Role r2 = new Role("user");
+        Plants r2 = new Plants("user");
         r2.setRoleid(2);
-        Role r3 = new Role("data");
+        Plants r3 = new Plants("data");
         r3.setRoleid(3);
 
         // admin, data, user
@@ -278,7 +276,7 @@ public class UserServiceImplTest
     @Test
     public void save()
     {
-        Role r2 = new Role("user");
+        Plants r2 = new Plants("user");
         r2.setRoleid(2);
 
         User u2 = new User("tiger",
@@ -302,7 +300,7 @@ public class UserServiceImplTest
     @Test
     public void savePut()
     {
-        Role r2 = new Role("user");
+        Plants r2 = new Plants("user");
         r2.setRoleid(2);
 
         User u2 = new User("tiger",
@@ -330,7 +328,7 @@ public class UserServiceImplTest
     @Test
     public void update()
     {
-        Role r2 = new Role("user");
+        Plants r2 = new Plants("user");
         r2.setRoleid(2);
 
         User u2 = new User("cinnamon",
@@ -370,7 +368,7 @@ public class UserServiceImplTest
     @Test(expected = ResourceNotFoundException.class)
     public void updateNotFound()
     {
-        Role r2 = new Role("user");
+        Plants r2 = new Plants("user");
         r2.setRoleid(2);
 
         User u2 = new User("cinnamon",
@@ -410,7 +408,7 @@ public class UserServiceImplTest
     @Test(expected = ResourceNotFoundException.class)
     public void updateAuthorizedToMakeChange()
     {
-        Role r2 = new Role("user");
+        Plants r2 = new Plants("user");
         r2.setRoleid(2);
 
         User u2 = new User("cinnamon",

@@ -1,7 +1,7 @@
 package com.lambdaschool.foundation.controllers;
 
-import com.lambdaschool.foundation.models.Role;
-import com.lambdaschool.foundation.services.RoleService;
+import com.lambdaschool.foundation.models.Plants;
+import com.lambdaschool.foundation.services.PlantService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -26,34 +26,34 @@ import java.util.List;
 public class RolesController
 {
     /**
-     * Using the Role service to process Role data
+     * Using the Plants service to process Plants data
      */
     @Autowired
-    RoleService roleService;
+    PlantService plantService;
 
     /**
      * List of all roles
      * <br>Example: <a href="http://localhost:2019/roles/roles">http://localhost:2019/roles/roles</a>
      *
      * @return JSON List of all the roles and their associated users
-     * @see RoleService#findAll() RoleService.findAll()
+     * @see PlantService#findAll() PlantService.findAll()
      */
     @GetMapping(value = "/roles",
         produces = "application/json")
     public ResponseEntity<?> listRoles()
     {
-        List<Role> allRoles = roleService.findAll();
-        return new ResponseEntity<>(allRoles,
+        List<Plants> allPlants = plantService.findAll();
+        return new ResponseEntity<>(allPlants,
             HttpStatus.OK);
     }
 
     /**
-     * The Role referenced by the given primary key
+     * The Plants referenced by the given primary key
      * <br>Example: <a href="http://localhost:2019/roles/role/3">http://localhost:2019/roles/role/3</a>
      *
      * @param roleId The primary key (long) of the role you seek
      * @return JSON object of the role you seek
-     * @see RoleService#findRoleById(long) RoleService.findRoleById(long)
+     * @see PlantService#findRoleById(long) PlantService.findRoleById(long)
      */
     @GetMapping(value = "/role/{roleId}",
         produces = "application/json")
@@ -61,18 +61,18 @@ public class RolesController
         @PathVariable
             Long roleId)
     {
-        Role r = roleService.findRoleById(roleId);
+        Plants r = plantService.findRoleById(roleId);
         return new ResponseEntity<>(r,
             HttpStatus.OK);
     }
 
     /**
-     * The Role with the given name
+     * The Plants with the given name
      * <br>Example: <a href="http://localhost:2019/roles/role/name/data">http://localhost:2019/roles/role/name/data</a>
      *
      * @param roleName The name of the role you seek
      * @return JSON object of the role you seek
-     * @see RoleService#findByName(String) RoleService.findByName(String)
+     * @see PlantService#findByName(String) PlantService.findByName(String)
      */
     @GetMapping(value = "/role/name/{roleName}",
         produces = "application/json")
@@ -80,35 +80,35 @@ public class RolesController
         @PathVariable
             String roleName)
     {
-        Role r = roleService.findByName(roleName);
+        Plants r = plantService.findByName(roleName);
         return new ResponseEntity<>(r,
             HttpStatus.OK);
     }
 
     /**
-     * Given a complete Role object, create a new Role record
+     * Given a complete Plants object, create a new Plants record
      * <br>Example: <a href="http://localhost:2019/roles/role">http://localhost:2019/roles/role</a>
      *
-     * @param newRole A complete new Role object
+     * @param newPlants A complete new Plants object
      * @return A location header with the URI to the newly created role and a status of CREATED
-     * @see RoleService#save(Role) RoleService.save(Role)
+     * @see PlantService#save(Plants) PlantService.save(Plants)
      */
     @PostMapping(value = "/role",
         consumes = "application/json")
     public ResponseEntity<?> addNewRole(
         @Valid
         @RequestBody
-            Role newRole)
+                Plants newPlants)
     {
         // ids are not recognized by the Post method
-        newRole.setRoleid(0);
-        newRole = roleService.save(newRole);
+        newPlants.setRoleid(0);
+        newPlants = plantService.save(newPlants);
 
         // set the location header for the newly created resource
         HttpHeaders responseHeaders = new HttpHeaders();
         URI newRoleURI = ServletUriComponentsBuilder.fromCurrentRequest()
             .path("/{roleid}")
-            .buildAndExpand(newRole.getRoleid())
+            .buildAndExpand(newPlants.getRoleid())
             .toUri();
         responseHeaders.setLocation(newRoleURI);
 
@@ -122,7 +122,7 @@ public class RolesController
      * <br>Example: <a href="http://localhost:2019/roles/role/3">http://localhost:2019/roles/role/3</a>
      *
      * @param roleid  The primary key (long) of the role you wish to update
-     * @param newRole The new name (String) for the role
+     * @param newPlants The new name (String) for the role
      * @return Status of OK
      */
     @PutMapping(value = "/role/{roleid}",
@@ -132,10 +132,10 @@ public class RolesController
             long roleid,
         @Valid
         @RequestBody
-            Role newRole)
+                Plants newPlants)
     {
-        newRole = roleService.update(roleid,
-            newRole);
+        newPlants = plantService.update(roleid,
+                newPlants);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 }

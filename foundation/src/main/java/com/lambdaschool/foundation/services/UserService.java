@@ -64,7 +64,7 @@ public interface UserService
     /**
      * Updates the provided fields in the user record referenced by the primary key.
      * <p>
-     * Regarding Role and Useremail items, this process only allows adding those. Deleting and editing those lists
+     * Regarding Plants and Useremail items, this process only allows adding those. Deleting and editing those lists
      * is done through a separate endpoint.
      *
      * @param user just the user fields to be updated.

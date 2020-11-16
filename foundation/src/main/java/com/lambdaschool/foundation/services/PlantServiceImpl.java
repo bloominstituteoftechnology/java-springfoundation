@@ -2,7 +2,7 @@ package com.lambdaschool.foundation.services;
 
 import com.lambdaschool.foundation.exceptions.ResourceFoundException;
 import com.lambdaschool.foundation.exceptions.ResourceNotFoundException;
-import com.lambdaschool.foundation.models.Role;
+import com.lambdaschool.foundation.models.Plants;
 import com.lambdaschool.foundation.repository.RoleRepository;
 import com.lambdaschool.foundation.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,15 +13,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Implements the RoleService Interface
+ * Implements the PlantService Interface
  */
 @Transactional
 @Service(value = "roleService")
-public class RoleServiceImpl
-    implements RoleService
+public class PlantServiceImpl
+    implements PlantService
 {
     /**
-     * Connects this service to the Role Model
+     * Connects this service to the Plants Model
      */
     @Autowired
     RoleRepository rolerepos;
@@ -39,9 +39,9 @@ public class RoleServiceImpl
     private UserAuditing userAuditing;
 
     @Override
-    public List<Role> findAll()
+    public List<Plants> findAll()
     {
-        List<Role> list = new ArrayList<>();
+        List<Plants> list = new ArrayList<>();
         /*
          * findAll returns an iterator set.
          * iterate over the iterator set and add each element to an array list.
@@ -54,16 +54,16 @@ public class RoleServiceImpl
 
 
     @Override
-    public Role findRoleById(long id)
+    public Plants findRoleById(long id)
     {
         return rolerepos.findById(id)
-            .orElseThrow(() -> new ResourceNotFoundException("Role id " + id + " not found!"));
+            .orElseThrow(() -> new ResourceNotFoundException("Plants id " + id + " not found!"));
     }
 
     @Override
-    public Role findByName(String name)
+    public Plants findByName(String name)
     {
-        Role rr = rolerepos.findByNameIgnoreCase(name);
+        Plants rr = rolerepos.findByNameIgnoreCase(name);
 
         if (rr != null)
         {
@@ -76,15 +76,15 @@ public class RoleServiceImpl
 
     @Transactional
     @Override
-    public Role save(Role role)
+    public Plants save(Plants plants)
     {
-        if (role.getUsers()
+        if (plants.getUsers()
             .size() > 0)
         {
-            throw new ResourceFoundException("User Roles are not updated through Role.");
+            throw new ResourceFoundException("User Roles are not updated through Plants.");
         }
 
-        return rolerepos.save(role);
+        return rolerepos.save(plants);
     }
 
     @Transactional
@@ -96,27 +96,27 @@ public class RoleServiceImpl
 
     @Transactional
     @Override
-    public Role update(
+    public Plants update(
         long id,
-        Role role)
+        Plants plants)
     {
-        if (role.getName() == null)
+        if (plants.getName() == null)
         {
-            throw new ResourceNotFoundException("No role name found to update!");
+            throw new ResourceNotFoundException("No plants name found to update!");
         }
 
-        if (role.getUsers()
+        if (plants.getUsers()
             .size() > 0)
         {
-            throw new ResourceFoundException("User Roles are not updated through Role. See endpoint POST: users/user/{userid}/role/{roleid}");
+            throw new ResourceFoundException("User Roles are not updated through Plants. See endpoint POST: users/user/{userid}/plants/{roleid}");
         }
 
-        Role newRole = findRoleById(id); // see if id exists
+        Plants newPlants = findRoleById(id); // see if id exists
 
         rolerepos.updateRoleName(userAuditing.getCurrentAuditor()
                 .get(),
             id,
-            role.getName());
+            plants.getName());
         return findRoleById(id);
     }
 }

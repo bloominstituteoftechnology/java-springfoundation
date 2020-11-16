@@ -2,10 +2,8 @@ package com.lambdaschool.foundation.controllers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.lambdaschool.foundation.FoundationApplication;
-import com.lambdaschool.foundation.models.Role;
+import com.lambdaschool.foundation.models.Plants;
 import com.lambdaschool.foundation.models.User;
-import com.lambdaschool.foundation.models.UserRoles;
-import com.lambdaschool.foundation.models.Useremail;
 import com.lambdaschool.foundation.services.UserService;
 import io.restassured.module.mockmvc.RestAssuredMockMvc;
 import org.junit.After;
@@ -63,11 +61,11 @@ public class UserControllerUnitTest
     {
         userList = new ArrayList<>();
 
-        Role r1 = new Role("admin");
+        Plants r1 = new Plants("admin");
         r1.setRoleid(1);
-        Role r2 = new Role("user");
+        Plants r2 = new Plants("user");
         r2.setRoleid(2);
-        Role r3 = new Role("data");
+        Plants r3 = new Plants("data");
         r3.setRoleid(3);
 
         // admin, data, user

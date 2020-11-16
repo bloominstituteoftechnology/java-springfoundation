@@ -32,7 +32,7 @@ curl -X GET -H "Accept: application/json" -H "Authorization: Bearer 56ab5075-de2
 curl -X POST -H "Content-Type: application/json" -d "{\"username\": \"Ginger\", \"password\": \"EATEATEAT\"}" http://localhost:2019/createnewuser
 
 // add snoopy again with full information
-curl -X POST -H "Content-Type: application/json" -H "Authorization: Bearer 56ab5075-de2e-43ba-a407-e52b8f267ac7" -d "{ \"username\": \"Snoopy\", \"password\": \"password\", \"userRoles\": [ { \"role\": { \"roleid\": 1 } } ], \"userphones\": [ { \"userphone\": \"myemail@local.home\" } ]}" http://localhost:2019/users/user
+curl -X POST -H "Content-Type: application/json" -H "Authorization: Bearer 56ab5075-de2e-43ba-a407-e52b8f267ac7" -d "{ \"username\": \"Snoopy\", \"password\": \"password\", \"userRoles\": [ { \"plants\": { \"roleid\": 1 } } ], \"userphones\": [ { \"userphone\": \"myemail@local.home\" } ]}" http://localhost:2019/users/user
 
 // look at all users and verify that snoopy and ginger are available
 curl -X GET -H "Accept: application/json" -H "Authorization: Bearer 56ab5075-de2e-43ba-a407-e52b8f267ac7" http://localhost:2019/users/users

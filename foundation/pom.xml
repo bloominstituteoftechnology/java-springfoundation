@@ -111,7 +111,7 @@
     </dependencies>
 
     <build>
-        <finalName>jrmmba-stumps</finalName>
+        <finalName>water-my-plants-tt39</finalName>
 
         <plugins>
             <plugin>
