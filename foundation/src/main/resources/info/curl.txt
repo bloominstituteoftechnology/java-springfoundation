@@ -1,69 +1,110 @@
-// admins access token = 56ab5075-de2e-43ba-a407-e52b8f267ac7
-// barnbarns access token = a87cdc74-7188-43d7-9c2e-f689841f083f
-
-// get admins access code
+// get admin's access token
 curl -X POST --user "lambda-client:lambda-secret" -d "grant_type=password&username=admin&password=password" http://localhost:2019/login
 
-// this works
-curl -X GET -H "Accept: application/json" -H "Authorization: Bearer 56ab5075-de2e-43ba-a407-e52b8f267ac7" http://localhost:2019/users/users
+{"access_token":"35168e4d-6765-4080-bc87-d30c4320767b","token_type":"bearer","scope":"read write trust"}
 
-// get users access code
+// get barnbarn's access token with wrong password
+curl -X POST --user "lambda-client:lambda-secret" -d 'grant_type=password&username=barnbarn&password=password!' http://localhost:2019/login
+
+{"error":"invalid_grant","error_description":"Bad credentials"}
+
+// get barnbarn's access token
 curl -X POST --user "lambda-client:lambda-secret" -d 'grant_type=password&username=barnbarn&password=ILuvM4th!' http://localhost:2019/login
 
-// this has an authentication error
-curl -X GET -H "Accept: application/json" -H "Authorization: Bearer a87cdc74-7188-43d7-9c2e-f689841f083f" http://localhost:2019/users/users
+{"access_token":"ec0af305-4639-4289-adc6-cc48cd08f8e9","token_type":"bearer","scope":"read write trust"}
 
-// switch back to admins access code and this works
-curl -X GET -H "Accept: application/json" -H "Authorization: Bearer 56ab5075-de2e-43ba-a407-e52b8f267ac7" http://localhost:2019/users/users
+// list all restaurants via barnbarn
+curl -X GET -H "Accept: application/json" -H "Authorization: Bearer ec0af305-4639-4289-adc6-cc48cd08f8e9" http://localhost:2019/restaurants/restaurants
 
-// add snoopy as a user
-curl -X POST -H "Content-Type: application/json" -H "Authorization: Bearer 56ab5075-de2e-43ba-a407-e52b8f267ac7" -d "{ \"username\":\"snoopy\", \"password\":\"password\", \"roleid\":"1" }" http://localhost:2019/users/user
+[{"restaurantid":12,"name":"Apple","address":"123 Main Street","city":"City","state":"ST","telephone":"555-555-1234","payments":[{"payment":{"paymentid":9,"type":"Credit Card"}},{"payment":{"paymentid":10,"type":"Cash"}},{"payment":{"paymentid":11,"type":"Mobile Pay"}}],"menus":[{"menuId":13,"dish":"Mac and Cheese","price":6.95},{"menuId":14,"dish":"Lasagna","price":8.5},{"menuId":15,"dish":"Meatloaf","price":7.77},{"menuId":16,"dish":"Tacos","price":8.49},{"menuId":17,"dish":"Chef Salad","price":12.5}]},{"restaurantid":18,"name":"Eagle Cafe","address":"321 Uptown Drive","city":"Town","state":"ST","telephone":"555-555-5555","payments":[{"payment":{"paymentid":10,"type":"Cash"}}],"menus":[{"menuId":19,"dish":"Tacos","price":10.49},{"menuId":20,"dish":"Barbacoa","price":12.75}]},{"restaurantid":21,"name":"Number 1 Eats","address":"565 Side Avenue","city":"Village","state":"ST","telephone":"555-123-1555","payments":[{"payment":{"paymentid":9,"type":"Credit Card"}},{"payment":{"paymentid":11,"type":"Mobile Pay"}}],"menus":[{"menuId":22,"dish":"Pizza","price":15.15}]}]
 
-// look up users and find snoopy's id
-curl -X GET -H "Accept: application/json" -H "Authorization: Bearer 56ab5075-de2e-43ba-a407-e52b8f267ac7" http://localhost:2019/users/users
+// list 1 restaurant by id via barnbarn
+curl -X GET -H "Accept: application/json" -H "Authorization: Bearer ec0af305-4639-4289-adc6-cc48cd08f8e9" http://localhost:2019/restaurants/restaurant/18
 
-// delete snoopy user
-curl -X DELETE -H "Authorization: Bearer 56ab5075-de2e-43ba-a407-e52b8f267ac7" http://localhost:2019/users/user/15
+{"restaurantid":18,"name":"Eagle Cafe","address":"321 Uptown Drive","city":"Town","state":"ST","telephone":"555-555-5555","payments":[{"payment":{"paymentid":10,"type":"Cash"}}],"menus":[{"menuId":19,"dish":"Tacos","price":10.49},{"menuId":20,"dish":"Barbacoa","price":12.75}]}
 
-// verify that snoopy is deleted
-curl -X GET -H "Accept: application/json" -H "Authorization: Bearer 56ab5075-de2e-43ba-a407-e52b8f267ac7" http://localhost:2019/users/user/15
+// delete restaurant via barnbarn - fails
+curl -X DELETE -H "Authorization: Bearer ec0af305-4639-4289-adc6-cc48cd08f8e9" http://localhost:2019/restaurants/restaurant/18
 
-// add ginger a new user
-curl -X POST -H "Content-Type: application/json" -d "{\"username\": \"Ginger\", \"password\": \"EATEATEAT\"}" http://localhost:2019/createnewuser
+{"error":"access_denied","error_description":"Access is denied"}
 
-// add snoopy again with full information
-curl -X POST -H "Content-Type: application/json" -H "Authorization: Bearer 56ab5075-de2e-43ba-a407-e52b8f267ac7" -d "{ \"username\": \"Snoopy\", \"password\": \"password\", \"userRoles\": [ { \"role\": { \"roleid\": 1 } } ], \"userphones\": [ { \"userphone\": \"myemail@local.home\" } ]}" http://localhost:2019/users/user
+// delete restaurant via admin
+curl -X DELETE -H "Authorization: Bearer 35168e4d-6765-4080-bc87-d30c4320767b" http://localhost:2019/restaurants/restaurant/18
 
-// look at all users and verify that snoopy and ginger are available
-curl -X GET -H "Accept: application/json" -H "Authorization: Bearer 56ab5075-de2e-43ba-a407-e52b8f267ac7" http://localhost:2019/users/users
+No Body Gets Returned
 
-// revokes token for admin
-curl -X GET -H "Accept: application/json" -H "Authorization: Bearer 56ab5075-de2e-43ba-a407-e52b8f267ac7" http://localhost:2019/oauth/revoke-token
+// POST restaurant via admin
+curl -X POST -H "Content-Type: application/json" -H "Authorization: Bearer 35168e4d-6765-4080-bc87-d30c4320767b" -d "{\"name\":\"John's Cafe\",\"address\":\"321 Dowtown Lane\",\"city\":\"My Town\",\"state\":\"ST\",\"telephone\":\"555-555-5432\",\"payments\":[{\"payment\":{\"paymentid\":10,\"type\":\"Cash\"}}],\"menus\":[{\"dish\":\"Tacos\",\"price\":5.55},{\"dish\":\"Barbacoa\",\"price\":12.12}]}" http://localhost:2019/restaurants/restaurant
 
-// this should fail with invalid token
-curl -X GET -H "Accept: application/json" -H "Authorization: Bearer 56ab5075-de2e-43ba-a407-e52b8f267ac7" http://localhost:2019/users/users
+No Body Gets Returned
 
-// get admins access code
-curl -X POST --user "lambda-client:lambda-secret" -d "grant_type=password&username=admin&password=password" http://localhost:2019/login
+// PUT restaurant (for restaurant id 21)
+curl -X PUT -H "Content-Type: application/json" -H "Authorization: Bearer 35168e4d-6765-4080-bc87-d30c4320767b" -d "{\"name\": \"Number 1 Eats\",\"address\": \"565 Side Avenue\",\"city\": \"Village\",\"state\": \"ST\",\"telephone\": \"555-123-1555\",\"payments\": [{\"payment\": {\"paymentid\": 9,\"type\": \"Credit Card\"}}],\"menus\": [{\"dish\": \"Pizza\",\"price\": 37.37},{\"dish\": \"Pizza Again\",\"price\": 15.15},{\"dish\": \"Pizza is the Best\",\"price\": 12.12}]}" http://localhost:2019/restaurants/restaurant/21
 
-// look at all users and ginger's id
-curl -X GET -H "Accept: application/json" -H "Authorization: Bearer 3d28337c-b699-4ae6-86fe-4961f42b1142" http://localhost:2019/users/users
+No Body Gets Returned
 
-// add email to ginger
-curl -X PUT -H "Content-Type: application/json" -H "Authorization: Bearer 3d28337c-b699-4ae6-86fe-4961f42b1142" -d  "{ \"userid\": 16, \"userphones\": [ { \"userphone\": \"whisker@home.local\" } ] }" http://localhost:2019/users/user/16
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-// look at all users and ginger's emails
-curl -X GET -H "Accept: application/json" -H "Authorization: Bearer 3d28337c-b699-4ae6-86fe-4961f42b1142" http://localhost:2019/users/users
-
-*** using a different host
-
-// sign on admin when on heroku
-curl -X POST --user "lambda-client:lambda-secret" -d "grant_type=password&username=admin&password=password" http://jrmmba-starthere.herokuapp.com/oauth/token
-
+Data Used for POST
 
 {
-    "userid": 7,
-    "userphones": [
-        { "userphone": "whisker@home.local"}
+    "name": "John's Cafe",
+    "address": "321 Dowtown Lane",
+    "city": "My Town",
+    "state": "ST",
+    "telephone": "555-555-5432",
+    "payments": [
+        {
+            "payment": {
+                "paymentid": 10,
+                "type": "Cash"
+            }
+        }
+    ],
+    "menus": [
+        {
+            "dish": "Tacos",
+            "price": 5.55
+        },
+        {
+            "dish": "Barbacoa",
+            "price": 12.12
+        }
     ]
 }
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Data Used for PUT
+
+{
+    "name": "Number 1 Eats",
+    "address": "565 Side Avenue",
+    "city": "Village",
+    "state": "ST",
+    "telephone": "555-555-1555",
+    "payments": [
+        {
+            "payment": {
+                "paymentid": 9,
+                "type": "Credit Card"
+            }
+        }
+    ],
+    "menus": [
+        {
+            "dish": "Pizza",
+            "price": 37.37
+        },
+        {
+            "dish": "Pizza Again",
+            "price": 15.15
+        },
+        {
+            "dish": "Pizza is the Best",
+            "price": 12.12
+        },
+    ]
+}
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
