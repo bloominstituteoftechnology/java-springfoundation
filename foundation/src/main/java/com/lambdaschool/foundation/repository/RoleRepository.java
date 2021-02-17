@@ -29,7 +29,7 @@ public interface RoleRepository
      */
     @Transactional
     @Modifying
-    @Query(value = "UPDATE roles SET name = :name, last_modified_by = :uname, last_modified_date = CURRENT_TIMESTAMP WHERE roleid = :roleid",
+    @Query(value = "UPDATE roles SET name = :name, lastmodifiedby = :uname, lastmodifieddate = CURRENT_TIMESTAMP WHERE roleid = :roleid",
         nativeQuery = true)
     void updateRoleName(
         String uname,
