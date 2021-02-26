@@ -59,7 +59,7 @@ public class AuthorizationServerConfig
      * Here we say the user is trusted.
      * Currently we are not implementing scope in our applications. We are just setting up the framework to do so.
      */
-    static final String SCOPE_TRUST = "trust";
+    static final String TRUST = "trust";
 
     /**
      * Tells how long in seconds the access code should be kept valid. After this timeout, the user has to sign on again.
@@ -105,7 +105,7 @@ public class AuthorizationServerConfig
                 AUTHORIZATION_CODE)
             .scopes(SCOPE_READ,
                 SCOPE_WRITE,
-                SCOPE_TRUST)
+                TRUST)
             .accessTokenValiditySeconds(ACCESS_TOKEN_VALIDITY_SECONDS);
     }
 

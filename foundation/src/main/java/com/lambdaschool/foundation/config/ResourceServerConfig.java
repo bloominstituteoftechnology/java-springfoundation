@@ -17,21 +17,11 @@ import org.springframework.security.oauth2.provider.error.OAuth2AccessDeniedHand
 public class ResourceServerConfig
     extends ResourceServerConfigurerAdapter
 {
-    /**
-     * We can have multiple resource servers in place. This ties this resource server to this application
-     */
     private static final String RESOURCE_ID = "resource_id";
 
-    /**
-     * Tries this application to the resource server
-     *
-     * @param resources the resource server
-     */
     @Override
     public void configure(ResourceServerSecurityConfigurer resources)
     {
-        // stateless refers to only working with access tokens. Testing using a different schema
-        // so stateless must be false.
         resources.resourceId(RESOURCE_ID)
             .stateless(false);
     }
@@ -79,6 +69,8 @@ public class ResourceServerConfig
             .authenticated()
             .antMatchers("/roles/**")
             .hasAnyRole("ADMIN")
+            .anyRequest()
+            .denyAll()
             .and()
             .exceptionHandling()
             .accessDeniedHandler(new OAuth2AccessDeniedHandler());

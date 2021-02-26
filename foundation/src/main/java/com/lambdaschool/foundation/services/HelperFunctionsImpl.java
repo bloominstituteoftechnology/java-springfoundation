@@ -6,6 +6,7 @@ import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.oauth2.client.resource.OAuth2AccessDeniedException;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -17,13 +18,17 @@ import java.util.List;
 public class HelperFunctionsImpl
     implements HelperFunctions
 {
+    /**
+     * A public field used to store data from another API. This will have to be populated each time the application is run.
+     * Population is done manually for each country code using an endpoint.
+     */
     public List<ValidationError> getConstraintViolation(Throwable cause)
     {
         // Find any data violations that might be associated with the error and report them
         // data validations get wrapped in other exceptions as we work through the Spring
         // exception chain. Hence we have to search the entire Spring Exception Stack
         // to see if we have any violation constraints.
-        while ((cause != null) && !(cause instanceof ConstraintViolationException || cause instanceof MethodArgumentNotValidException))
+        while ((cause != null) && !(cause instanceof org.hibernate.exception.ConstraintViolationException || cause instanceof MethodArgumentNotValidException))
         {
             System.out.println(cause.getClass()
                 .toString());
@@ -35,9 +40,9 @@ public class HelperFunctionsImpl
         // we know that cause either null or an instance of ConstraintViolationException
         if (cause != null)
         {
-            if (cause instanceof ConstraintViolationException)
+            if (cause instanceof org.hibernate.exception.ConstraintViolationException)
             {
-                ConstraintViolationException ex = (ConstraintViolationException) cause;
+                org.hibernate.exception.ConstraintViolationException ex = (ConstraintViolationException) cause;
                 ValidationError newVe = new ValidationError();
                 newVe.setCode(ex.getMessage());
                 newVe.setMessage(ex.getConstraintName());
@@ -86,8 +91,7 @@ public class HelperFunctionsImpl
         } else
         {
             // stop user is not authorized to make this change so stop the whole process and throw an exception
-            throw new ResourceNotFoundException(authentication.getName() + " not authorized to make change");
+            throw new OAuth2AccessDeniedException();
         }
     }
-
 }

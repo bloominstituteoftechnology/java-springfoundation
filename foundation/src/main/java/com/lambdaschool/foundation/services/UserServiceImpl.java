@@ -7,6 +7,7 @@ import com.lambdaschool.foundation.models.UserRoles;
 import com.lambdaschool.foundation.models.Useremail;
 import com.lambdaschool.foundation.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.oauth2.client.resource.OAuth2AccessDeniedException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -47,7 +48,6 @@ public class UserServiceImpl
     @Override
     public List<User> findByNameContaining(String username)
     {
-
         return userrepos.findByUsernameContainingIgnoreCase(username.toLowerCase());
     }
 
@@ -89,7 +89,6 @@ public class UserServiceImpl
     @Override
     public User save(User user)
     {
-
         User newUser = new User();
 
         if (user.getUserid() != 0)
@@ -136,8 +135,6 @@ public class UserServiceImpl
     {
         User currentUser = findUserById(id);
 
-        // update own thing
-        // admin update
         if (helperFunctions.isAuthorizedToMakeChange(currentUser.getUsername()))
         {
             if (user.getUsername() != null)
@@ -191,7 +188,7 @@ public class UserServiceImpl
         {
             // note we should never get to this line but is needed for the compiler
             // to recognize that this exception can be thrown
-            throw new ResourceNotFoundException("This user is not authorized to make change");
+            throw new OAuth2AccessDeniedException();
         }
     }
 

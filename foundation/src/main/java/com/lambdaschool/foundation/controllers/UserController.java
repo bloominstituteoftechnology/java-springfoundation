@@ -7,9 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -38,16 +36,11 @@ public class UserController
      * @return JSON list of all users with a status of OK
      * @see UserService#findAll() UserService.findAll()
      */
-    @PreAuthorize("hasAnyRole('ADMIN')")
     @GetMapping(value = "/users",
         produces = "application/json")
     public ResponseEntity<?> listAllUsers()
     {
         List<User> myUsers = userService.findAll();
-
-        System.out.println(SecurityContextHolder.getContext()
-            .getAuthentication().getName());
-
         return new ResponseEntity<>(myUsers,
             HttpStatus.OK);
     }
@@ -60,7 +53,6 @@ public class UserController
      * @return JSON object of the user you seek
      * @see UserService#findUserById(long) UserService.findUserById(long)
      */
-    @PreAuthorize("hasAnyRole('ADMIN')")
     @GetMapping(value = "/user/{userId}",
         produces = "application/json")
     public ResponseEntity<?> getUserById(
@@ -80,7 +72,6 @@ public class UserController
      * @return JSON object of the user you seek
      * @see UserService#findByName(String) UserService.findByName(String)
      */
-    @PreAuthorize("hasAnyRole('ADMIN')")
     @GetMapping(value = "/user/name/{userName}",
         produces = "application/json")
     public ResponseEntity<?> getUserByName(
@@ -100,7 +91,6 @@ public class UserController
      * @return A JSON list of users you seek
      * @see UserService#findByNameContaining(String) UserService.findByNameContaining(String)
      */
-    @PreAuthorize("hasAnyRole('ADMIN')")
     @GetMapping(value = "/user/name/like/{userName}",
         produces = "application/json")
     public ResponseEntity<?> getUserLikeName(
@@ -206,7 +196,6 @@ public class UserController
      * @param id the primary key of the user you wish to delete
      * @return Status of OK
      */
-    @PreAuthorize("hasAnyRole('ADMIN')")
     @DeleteMapping(value = "/user/{id}")
     public ResponseEntity<?> deleteUserById(
         @PathVariable
@@ -224,6 +213,8 @@ public class UserController
      * @return JSON of the current user. Status of OK
      * @see UserService#findByName(String) UserService.findByName(authenticated user)
      */
+    @ApiOperation(value = "returns the currently authenticated user",
+        response = User.class)
     @GetMapping(value = "/getuserinfo",
         produces = {"application/json"})
     public ResponseEntity<?> getCurrentUserInfo(Authentication authentication)

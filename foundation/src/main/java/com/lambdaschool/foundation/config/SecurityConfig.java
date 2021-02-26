@@ -14,8 +14,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.security.oauth2.provider.token.store.InMemoryTokenStore;
 
-import javax.annotation.Resource;
-
 /**
  * This class allows us to set standard security protocols to be used throughout the application,
  * such as password encoding, location of token store, our implementation of users, among others
@@ -45,8 +43,8 @@ public class SecurityConfig
     /**
      * Connects the user details used by Spring Security to our implementation of it
      */
-    @Resource(name = "securityUserService")
-    private UserDetailsService userDetailsService;
+    @Autowired
+    private UserDetailsService securityUserService;
 
     /**
      * Ties our implementation of user details and password encoding to the Authentication Manager
@@ -59,7 +57,7 @@ public class SecurityConfig
         throws
         Exception
     {
-        auth.userDetailsService(userDetailsService)
+        auth.userDetailsService(securityUserService)
             .passwordEncoder(encoder());
     }
 

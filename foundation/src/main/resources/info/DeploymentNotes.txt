@@ -1,0 +1,149 @@
+*****************************
+!!! NOTE !!!
+# Environment Variables Needed for OAuth2 Authentication Server. These are needed both locally and on the deployed application.
+
+# OAUTHCLIENTID
+# OAUTHCLIENTSECRET
+
+*****************************
+
+### For PostgreSQL add the dependency
+
+<dependency>
+    <groupId>org.postgresql</groupId>
+    <artifactId>postgresql</artifactId>
+</dependency>
+
+Add the DataSourceConfig class to use PostgreSQL
+Add lines to application.properties
+
+# Which db to run
+local.run.db=H2
+# local.run.db=POSTGRESQL
+
+*****************************
+
+### To use PostgreSQL locally
+
+Add @PropertySource("file:/Users/lambdajohn/foundationconfig.properties") to FoundationApplication
+
+Create a file called /Users/lambdajohn/foundationconfig.properties with the following line:
+
+SPRING.DATASOURCE.URL=jdbc:postgresql://localhost:5432/foundationdb?password=password&sslmode=prefer&user=postgres
+
+When using @Value - The Hierarchy of where the values are found
+    OS environment variables.
+    Application properties packaged inside your jar (application.properties including YAML and profile variants).
+    @PropertySource annotation on your Main Class
+
+*****************************
+
+### Connect H2 Console to Local Postgres
+
+Following this example fill in the fields on the h2console
+
+Saved Settings: Generic PostgreSQL
+Setting Name:   Generic PostgreSQL
+
+Driver Class: org.postgresql.Driver
+JDBC URL:  jdbc:postgresql://localhost:5432/foundationdb
+User Name: postgres
+Password:  password
+
+*****************************
+
+### Deploy to Heroku using Maven
+
+#### Setup Heroku
+
+heroku login
+heroku create jrmmba-foundation
+heroku addons:create heroku-postgresql:hobby-dev -a jrmmba-foundation
+heroku config -a jrmmba-foundation
+
+heroku config:set OAUTHCLIENTID=lambda-client -a jrmmba-foundation
+heroku config:set OAUTHCLIENTSECRET=lambda-secret -a jrmmba-foundation
+
+Use the heroku GUI to access log
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+#### Now In Java
+
+# Add the plugin for heroku
+
+<finalName>jrmmba-foundation</finalName>
+
+<!-- Heroku Maven Plugin Configuration -->
+<plugin>
+    <groupId>com.heroku.sdk</groupId>
+    <artifactId>heroku-maven-plugin</artifactId>
+    <version>3.0.2</version>
+    <configuration>
+        <appName>${project.build.finalName}</appName>
+        <includeTarget>false</includeTarget>
+        <includes>
+            <include>${project.build.directory}/${project.build.finalName}.jar</include>
+        </includes>
+        <jdkVersion>${java.version}</jdkVersion>
+        <processTypes>
+            <web>java $JAVA_OPTS -Dserver.port=$PORT -jar target/${project.build.finalName}.jar</web>
+        </processTypes>
+    </configuration>
+</plugin>
+
+Add SimpleCorsFilter.java to handle deploying and CORS issues
+
+In application.properties add spring.h2.console.settings.web-allow-others=true
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+#### To actually deploy, go to
+#### You need to do this each time code is changed!
+
+Maven Tab
+Turn on Skip Test Mode
+Maven Goals
+mvn clean heroku:deploy -X
+
+****************************
+
+### Connect H2 Console to Heroku Postgres
+
+jdbc:postgresql://ec2-52-4-177-4.compute-1.amazonaws.com/d3bgb040dnfiod
+
+On Heroku
+Find data from Heroku Config Var for DATABASE_URL. For example
+
+postgres://username      :password                                                        @hostname                                 :5432/database name
+postgres://knpiphpcrmdjaf:faf7655d32f2361fb57a5e9d96d1e38a11c532c1070960f49fb70bf080a3b409@ec2-54-242-43-231.compute-1.amazonaws.com:5432/dc61i9dr7csv7k
+H2Console - http://jrmmba-foundation.herokuapp.com/h2-console
+
+Following this example fill in the fields on the h2console
+
+Saved Settings: Generic PostgreSQL
+Setting Name:   Generic PostgreSQL
+
+Driver Class: org.postgresql.Driver
+JDBC URL:  jdbc:postgresql://ec2-54-242-43-231.compute-1.amazonaws.com:5432/dc61i9dr7csv7k
+User Name: knpiphpcrmdjaf
+Password:  faf7655d32f2361fb57a5e9d96d1e38a11c532c1070960f49fb70bf080a3b409
+
+*****************************
+
+### Deploy to Heroku using GitHub and Continuous Integration (CI)
+### Note that once this is set up, each time you push to the chosen branch on GitHub,
+### your application will get updated on Heroku and restart
+
+see: https://stackoverflow.com/questions/39197334/automated-heroku-deploy-from-subfolder
+
+In the Web Interface of Heroku
+
+Under Deploy GitHub select repository (must have admin rights to repo)
+
+Create a config var PROJECT_PATH = secured-restaurants-deployed
+
+Under Settings BuildPack add https://github.com/timanovsky/subdir-heroku-buildpack.git. Move it to the top buildpack
+    You may wish to fork the subdir-heroku-buildpack to your own repositories
+
+Back under Deploy GitHub - pick the branch you want to deploy and enable automatic deploys

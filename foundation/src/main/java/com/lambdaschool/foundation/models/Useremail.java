@@ -4,7 +4,6 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
-import javax.validation.constraints.NotNull;
 
 /**
  * The entity allowing interaction with the useremails table
@@ -27,7 +26,7 @@ public class Useremail
      * Email (String) for this user. Cannot be nullable.
      * Must be in the format userid@domain.upperLevelDomain
      */
-    @NotNull
+    @Column(nullable = false)
     @Email
     private String useremail;
 
@@ -39,8 +38,8 @@ public class Useremail
      * A user can have many emails.
      */
     @ManyToOne
-    @NotNull
-    @JoinColumn(name = "userid")
+    @JoinColumn(name = "userid",
+        nullable = false)
     @JsonIgnoreProperties(value = "useremails",
         allowSetters = true)
     private User user;

@@ -3,7 +3,6 @@ package com.lambdaschool.foundation.models;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -25,8 +24,8 @@ public class Role
     /**
      * The name (String) of the role. Cannot be null and must be unique.
      */
-    @NotNull
-    @Column(unique = true)
+    @Column(nullable = false,
+        unique = true)
     private String name;
 
 

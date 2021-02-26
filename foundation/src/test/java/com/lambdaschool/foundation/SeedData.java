@@ -11,6 +11,7 @@ import com.lambdaschool.foundation.services.RoleService;
 import com.lambdaschool.foundation.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -23,6 +24,11 @@ import java.util.Locale;
  * after the application context has been loaded.
  */
 @Transactional
+@ConditionalOnProperty(
+    prefix = "command.line.runner",
+    value = "enabled",
+    havingValue = "true",
+    matchIfMissing = true)
 @Component
 public class SeedData
     implements CommandLineRunner
@@ -66,7 +72,7 @@ public class SeedData
         // admin, data, user
         User u1 = new User("admin",
             "password",
-            "admin@lambdaschool.local");
+            "admin@lambdaschool.test");
         u1.getRoles()
             .add(new UserRoles(u1,
                 r1));
@@ -78,17 +84,17 @@ public class SeedData
                 r3));
         u1.getUseremails()
             .add(new Useremail(u1,
-                "admin@email.local"));
+                "admin@email.test"));
         u1.getUseremails()
             .add(new Useremail(u1,
-                "admin@mymail.local"));
+                "admin@mymail.test"));
 
         userService.save(u1);
 
         // data, user
         User u2 = new User("cinnamon",
             "1234567",
-            "cinnamon@lambdaschool.local");
+            "cinnamon@lambdaschool.test");
         u2.getRoles()
             .add(new UserRoles(u2,
                 r2));
@@ -97,25 +103,25 @@ public class SeedData
                 r3));
         u2.getUseremails()
             .add(new Useremail(u2,
-                "cinnamon@mymail.local"));
+                "cinnamon@mymail.test"));
         u2.getUseremails()
             .add(new Useremail(u2,
-                "hops@mymail.local"));
+                "hops@mymail.test"));
         u2.getUseremails()
             .add(new Useremail(u2,
-                "bunny@email.local"));
+                "bunny@email.test"));
         userService.save(u2);
 
         // user
         User u3 = new User("barnbarn",
             "ILuvM4th!",
-            "barnbarn@lambdaschool.local");
+            "barnbarn@lambdaschool.test");
         u3.getRoles()
             .add(new UserRoles(u3,
                 r2));
         u3.getUseremails()
             .add(new Useremail(u3,
-                "barnbarn@email.local"));
+                "barnbarn@email.test"));
         userService.save(u3);
 
         User u4 = new User("puttat",

@@ -1,35 +1,27 @@
 package com.lambdaschool.foundation.models;
 
-import javax.persistence.Column;
 import javax.validation.constraints.Email;
-import javax.validation.constraints.NotNull;
 
 /**
  * A model used to create a new user. The minimum information needed to create a user.
  * Note the role will default to USER.
- *
- * Should include ALL fields that the frontend wants to send the backend when a user self enrolls
  */
 public class UserMinimum
 {
     /**
      * The username (String)
      */
-    @NotNull
-    @Column(nullable = false)
     private String username;
 
     /**
      * The user's password (String)
      */
-    @NotNull
     private String password;
 
     /**
      * The user's primary email address (String)
      */
     @Email
-    @NotNull
     private String primaryemail;
 
     /**

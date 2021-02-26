@@ -1,13 +1,12 @@
 package com.lambdaschool.foundation.services;
 
-import com.lambdaschool.foundation.FoundationApplication;
+import com.lambdaschool.foundation.FoundationApplicationTesting;
 import com.lambdaschool.foundation.exceptions.ResourceNotFoundException;
 import com.lambdaschool.foundation.models.Role;
 import com.lambdaschool.foundation.models.User;
 import com.lambdaschool.foundation.models.UserRoles;
 import com.lambdaschool.foundation.models.Useremail;
 import com.lambdaschool.foundation.repository.UserRepository;
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -26,12 +25,11 @@ import static junit.framework.TestCase.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
 
-/**
- * This test class covers 100% of the methods and 100% of the lines in the UserServiceImpl.class
- */
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes = FoundationApplication.class)
-public class UserServiceImplTest
+@SpringBootTest(classes = FoundationApplicationTesting.class,
+    properties = {
+        "command.line.runner.enabled=false"})
+public class UserServiceImplNoDBTest
 {
     @Autowired
     private UserService userService;
@@ -40,14 +38,15 @@ public class UserServiceImplTest
     private UserRepository userrepos;
 
     @MockBean
-    HelperFunctions helperFunctions;
+    private RoleService roleService;
+
+    @MockBean
+    private HelperFunctions helperFunctions;
 
     private List<User> userList;
 
-
     @Before
-    public void setUp() throws
-                        Exception
+    public void setUp() throws Exception
     {
         userList = new ArrayList<>();
 
@@ -59,9 +58,9 @@ public class UserServiceImplTest
         r3.setRoleid(3);
 
         // admin, data, user
-        User u1 = new User("testadmin",
+        User u1 = new User("admin",
             "ILuvM4th!",
-            "admin@lambdaschool.local");
+            "admin@lambdaschool.test");
         u1.getRoles()
             .add(new UserRoles(u1,
                 r1));
@@ -74,14 +73,14 @@ public class UserServiceImplTest
 
         u1.getUseremails()
             .add(new Useremail(u1,
-                "admin@email.local"));
+                "admin@email.test"));
         u1.getUseremails()
             .get(0)
             .setUseremailid(10);
 
         u1.getUseremails()
             .add(new Useremail(u1,
-                "admin@mymail.local"));
+                "admin@mymail.test"));
         u1.getUseremails()
             .get(1)
             .setUseremailid(11);
@@ -93,7 +92,7 @@ public class UserServiceImplTest
         ArrayList<UserRoles> datas = new ArrayList<>();
         User u2 = new User("cinnamon",
             "1234567",
-            "cinnamon@lambdaschool.local");
+            "cinnamon@lambdaschool.test");
         u1.getRoles()
             .add(new UserRoles(u2,
                 r2));
@@ -103,21 +102,21 @@ public class UserServiceImplTest
 
         u2.getUseremails()
             .add(new Useremail(u2,
-                "cinnamon@mymail.local"));
+                "cinnamon@mymail.test"));
         u2.getUseremails()
             .get(0)
             .setUseremailid(20);
 
         u2.getUseremails()
             .add(new Useremail(u2,
-                "hops@mymail.local"));
+                "hops@mymail.test"));
         u2.getUseremails()
             .get(1)
             .setUseremailid(21);
 
         u2.getUseremails()
             .add(new Useremail(u2,
-                "bunny@email.local"));
+                "bunny@email.test"));
         u2.getUseremails()
             .get(2)
             .setUseremailid(22);
@@ -135,7 +134,7 @@ public class UserServiceImplTest
 
         u3.getUseremails()
             .add(new Useremail(u3,
-                "barnbarn@email.local"));
+                "barnbarn@email.test"));
         u3.getUseremails()
             .get(0)
             .setUseremailid(30);
@@ -163,20 +162,7 @@ public class UserServiceImplTest
         u5.setUserid(105);
         userList.add(u5);
 
-        System.out.println("\n*** Seed Data ***");
-        for (User u : userList)
-        {
-            System.out.println(u.getUserid() + " " + u.getUsername());
-        }
-        System.out.println("*** Seed Data ***\n");
-
         MockitoAnnotations.initMocks(this);
-    }
-
-    @After
-    public void tearDown() throws
-                           Exception
-    {
     }
 
     @Test
@@ -185,7 +171,7 @@ public class UserServiceImplTest
         Mockito.when(userrepos.findById(101L))
             .thenReturn(Optional.of(userList.get(0)));
 
-        assertEquals("testadmin",
+        assertEquals("admin",
             userService.findUserById(101L)
                 .getUsername());
     }
@@ -245,11 +231,11 @@ public class UserServiceImplTest
     @Test
     public void findByUsername()
     {
-        Mockito.when(userrepos.findByUsername("testadmin"))
+        Mockito.when(userrepos.findByUsername("admin"))
             .thenReturn(userList.get(0));
 
-        assertEquals("testadmin",
-            userService.findByName("testadmin")
+        assertEquals("admin",
+            userService.findByName("admin")
                 .getUsername());
     }
 
@@ -294,6 +280,9 @@ public class UserServiceImplTest
         Mockito.when(userrepos.save(any(User.class)))
             .thenReturn(u2);
 
+        Mockito.when(roleService.findRoleById(2))
+            .thenReturn(r2);
+
         assertEquals("tiger",
             userService.save(u2)
                 .getUsername());
@@ -315,6 +304,9 @@ public class UserServiceImplTest
             .add(new Useremail(u2,
                 "tiger@tiger.local"));
         u2.setUserid(103L);
+
+        Mockito.when(roleService.findRoleById(2))
+            .thenReturn(r2);
 
         Mockito.when(userrepos.findById(103L))
             .thenReturn(Optional.of(u2));
@@ -350,14 +342,17 @@ public class UserServiceImplTest
             .add(new Useremail(u2,
                 "bunny@email.thump"));
 
+        Mockito.when(roleService.findRoleById(2))
+            .thenReturn(r2);
+
         Mockito.when(userrepos.findById(103L))
             .thenReturn(Optional.of(userList.get(2)));
 
-        Mockito.when(helperFunctions.isAuthorizedToMakeChange(anyString()))
-            .thenReturn(true);
-
         Mockito.when(userrepos.save(any(User.class)))
             .thenReturn(u2);
+
+        Mockito.when(helperFunctions.isAuthorizedToMakeChange(anyString()))
+            .thenReturn(true);
 
         assertEquals("bunny@email.thump",
             userService.update(u2,
@@ -390,54 +385,17 @@ public class UserServiceImplTest
             .add(new Useremail(u2,
                 "bunny@email.thump"));
 
+        Mockito.when(roleService.findRoleById(2))
+            .thenReturn(r2);
+
         Mockito.when(userrepos.findById(103L))
             .thenReturn(Optional.empty());
 
-        Mockito.when(helperFunctions.isAuthorizedToMakeChange(anyString()))
-            .thenReturn(true);
-
         Mockito.when(userrepos.save(any(User.class)))
             .thenReturn(u2);
-
-        assertEquals("bunny@email.thump",
-            userService.update(u2,
-                103L)
-                .getUseremails()
-                .get(2)
-                .getUseremail());
-    }
-
-    @Test(expected = ResourceNotFoundException.class)
-    public void updateAuthorizedToMakeChange()
-    {
-        Role r2 = new Role("user");
-        r2.setRoleid(2);
-
-        User u2 = new User("cinnamon",
-            "password",
-            "cinnamon@school.lambda");
-        u2.getRoles()
-            .add(new UserRoles(u2,
-                r2));
-
-        u2.getUseremails()
-            .add(new Useremail(u2,
-                "cinnamon@mymail.thump"));
-        u2.getUseremails()
-            .add(new Useremail(u2,
-                "hops@mymail.thump"));
-        u2.getUseremails()
-            .add(new Useremail(u2,
-                "bunny@email.thump"));
-
-        Mockito.when(userrepos.findById(103L))
-            .thenReturn(Optional.of(u2));
 
         Mockito.when(helperFunctions.isAuthorizedToMakeChange(anyString()))
             .thenReturn(false);
-
-        Mockito.when(userrepos.save(any(User.class)))
-            .thenReturn(u2);
 
         assertEquals("bunny@email.thump",
             userService.update(u2,

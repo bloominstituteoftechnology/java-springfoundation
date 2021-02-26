@@ -1,6 +1,6 @@
 package com.lambdaschool.foundation.controllers;
 
-import com.lambdaschool.foundation.FoundationApplication;
+import com.lambdaschool.foundation.FoundationApplicationTesting;
 import io.restassured.module.mockmvc.RestAssuredMockMvc;
 import org.junit.After;
 import org.junit.Before;
@@ -26,14 +26,11 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-/**
- * Integration test for UserController so only looking at 100% coverage on UserController
- */
-
 @RunWith(SpringRunner.class)
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, classes = FoundationApplication.class)
+@WithUserDetails("admin")
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT,
+    classes = FoundationApplicationTesting.class)
 @AutoConfigureMockMvc
-@WithUserDetails(value = "admin")
 public class UserControllerIntegrationTest
 {
     @Autowired
@@ -41,9 +38,9 @@ public class UserControllerIntegrationTest
 
     private MockMvc mockMvc;
 
+
     @Before
-    public void setUp() throws
-                        Exception
+    public void setUp() throws Exception
     {
         RestAssuredMockMvc.webAppContextSetup(webApplicationContext);
 
@@ -53,8 +50,7 @@ public class UserControllerIntegrationTest
     }
 
     @After
-    public void tearDown() throws
-                           Exception
+    public void tearDown() throws Exception
     {
     }
 
@@ -81,18 +77,6 @@ public class UserControllerIntegrationTest
             .andExpect(content().string(containsString("cinnamon")));
     }
 
-    @WithUserDetails("admin")
-    @Test
-    public void getUserInfo() throws
-                              Exception
-    {
-        this.mockMvc.perform(get("/users/getuserinfo"))
-            .andDo(print())
-            .andExpect(status().isOk())
-            .andExpect(content().string(containsString("admin")));
-    }
-
-    @WithUserDetails("admin")
     @Test
     public void getUserLikeName() throws
                                   Exception
@@ -104,7 +88,6 @@ public class UserControllerIntegrationTest
             .andExpect(content().string(containsString("misskitty")));
     }
 
-    @WithUserDetails("admin")
     @Test
     public void getUserById() throws
                               Exception
@@ -116,7 +99,6 @@ public class UserControllerIntegrationTest
             .andExpect(content().string(containsString("admin")));
     }
 
-    @WithUserDetails("admin")
     @Test
     public void getUserByIdNotFound() throws
                                       Exception
@@ -128,7 +110,6 @@ public class UserControllerIntegrationTest
             .andExpect(content().string(containsString("ResourceNotFoundException")));
     }
 
-    @WithUserDetails("admin")
     @Test
     public void getUserByName() throws
                                 Exception
@@ -140,7 +121,6 @@ public class UserControllerIntegrationTest
             .andExpect(content().string(containsString("admin")));
     }
 
-    @WithUserDetails("admin")
     @Test
     public void getUserByNameNotFound() throws
                                         Exception
@@ -152,7 +132,6 @@ public class UserControllerIntegrationTest
             .andExpect(content().string(containsString("ResourceNotFoundException")));
     }
 
-    @WithUserDetails("admin")
     @Test
     public void givenPostAUser() throws
                                  Exception
@@ -167,7 +146,6 @@ public class UserControllerIntegrationTest
                 .exists("location"));
     }
 
-    @WithUserDetails("admin")
     @Test
     public void givenPutAUser() throws
                                 Exception
@@ -180,7 +158,6 @@ public class UserControllerIntegrationTest
             .andExpect(status().isOk());
     }
 
-    @WithUserDetails("admin")
     @Test
     public void deleteUserById() throws
                                  Exception
@@ -191,7 +168,6 @@ public class UserControllerIntegrationTest
             .andExpect(status().is2xxSuccessful());
     }
 
-    @WithUserDetails("admin")
     @Test
     public void deleteUserByIdNotFound() throws
                                          Exception
@@ -202,7 +178,6 @@ public class UserControllerIntegrationTest
             .andExpect(status().is4xxClientError());
     }
 
-    @WithUserDetails("admin")
     @Test
     public void UpdateUser() throws
                              Exception
@@ -214,5 +189,14 @@ public class UserControllerIntegrationTest
             .accept(MediaType.APPLICATION_JSON))
             .andDo(print())
             .andExpect(status().isOk());
+    }
+
+    @Test
+    public void getCurrentUserInfo() throws Exception
+    {
+        this.mockMvc.perform(get("/users/getuserinfo"))
+            .andDo(print())
+            .andExpect(status().isOk())
+            .andExpect(content().string(containsString("admin")));
     }
 }

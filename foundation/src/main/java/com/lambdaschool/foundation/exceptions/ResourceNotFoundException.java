@@ -8,7 +8,6 @@ public class ResourceNotFoundException
 {
     public ResourceNotFoundException(String message)
     {
-        super(String.format("Error %s",
-            message));
+        super("Error from a Lambda School Application " + message);
     }
 }

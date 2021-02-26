@@ -5,17 +5,17 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.2.9.RELEASE</version>
+        <version>2.2.8.RELEASE</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.lambdaschool</groupId>
     <artifactId>foundation</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>foundation</name>
-    <description>Demo project for Spring Boot</description>
+    <name>usermodel</name>
+    <description>Scaffolding App for Lambda School Build Week</description>
 
     <properties>
-        <java.version>14</java.version>
+        <java.version>11</java.version>
     </properties>
 
     <dependencies>
@@ -108,10 +108,11 @@
             <version>3.3.0</version>
             <scope>test</scope>
         </dependency>
+
     </dependencies>
 
     <build>
-        <finalName>jrmmba-stumps</finalName>
+        <finalName>jrmmba-foundation</finalName>
 
         <plugins>
             <plugin>
@@ -135,7 +136,6 @@
                     </processTypes>
                 </configuration>
             </plugin>
-
         </plugins>
     </build>
 

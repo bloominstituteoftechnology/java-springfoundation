@@ -3,6 +3,7 @@ package com.lambdaschool.foundation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 
@@ -11,6 +12,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
  */
 @EnableJpaAuditing
 @SpringBootApplication
+@PropertySource(value = "file:/Users/lambdajohn/foundationconf.properties", ignoreResourceNotFound = true)
 public class FoundationApplication
 {
     /**
@@ -55,7 +57,8 @@ public class FoundationApplication
                 args);
         } else
         {
-            System.out.println("Environment Variables NOT SET: OAUTHCLIENTID and / or OAUTHCLIENTSECRET");
+            System.out.println("Either or both the environment variables OAUTHCLIENTID, OAUTHCLIENTSECRET are not set. " +
+                "They are required for this application to run");
         }
     }
 }

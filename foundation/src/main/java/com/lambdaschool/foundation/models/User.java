@@ -8,7 +8,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
-import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -32,22 +31,22 @@ public class User
     /**
      * The username (String). Cannot be null and must be unique
      */
-    @NotNull
-    @Column(unique = true)
+    @Column(nullable = false,
+        unique = true)
     private String username;
 
     /**
      * The password (String) for this user. Cannot be null. Never get displayed
      */
-    @NotNull
+    @Column(nullable = false)
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String password;
 
     /**
      * Primary email account of user. Could be used as the userid. Cannot be null and must be unique.
      */
-    @NotNull
-    @Column(unique = true)
+    @Column(nullable = false,
+        unique = true)
     @Email
     private String primaryemail;
 

@@ -14,6 +14,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.http.converter.HttpMessageNotWritableException;
+import org.springframework.security.oauth2.client.resource.OAuth2AccessDeniedException;
 import org.springframework.validation.BindException;
 import org.springframework.web.HttpMediaTypeNotAcceptableException;
 import org.springframework.web.HttpMediaTypeNotSupportedException;
@@ -102,6 +103,14 @@ public class RestExceptionHandler
         return new ResponseEntity<>(errorDetail,
             null,
             HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(OAuth2AccessDeniedException.class)
+    public ResponseEntity<?> handleOAuth2AccessDeniedException(OAuth2AccessDeniedException ex)
+    {
+        return new ResponseEntity<>(ex,
+            null,
+            HttpStatus.resolve(ex.getHttpErrorCode()));
     }
 
     /**

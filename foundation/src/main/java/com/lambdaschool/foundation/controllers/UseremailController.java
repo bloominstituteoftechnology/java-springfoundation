@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -33,7 +32,6 @@ public class UseremailController
      *
      * @return JSON list of all users emails
      */
-    @PreAuthorize("hasAnyRole('ADMIN')")
     @GetMapping(value = "/useremails",
         produces = "application/json")
     public ResponseEntity<?> listAllUseremails()
@@ -50,7 +48,6 @@ public class UseremailController
      * @param useremailId the primary key of the user email combination you seek
      * @return JSON object of the user email combination you seek with a status of OK
      */
-    @PreAuthorize("hasAnyRole('ADMIN')")
     @GetMapping(value = "/useremail/{useremailId}",
         produces = "application/json")
     public ResponseEntity<?> getUserEmailById(
