@@ -150,8 +150,9 @@ Now under Settings -> Reveal Config Vars
         The application lives in the folder where POM.XML file is.
 
 Under Settings -> BuildPack
+    add heroku/java by clicking on Java Button
     add https://github.com/timanovsky/subdir-heroku-buildpack.git. Move it to the top buildpack
-    You may wish to fork the subdir-heroku-buildpack to your own repositories
+        You may wish to fork the subdir-heroku-buildpack to your own repositories
 
 Back under Deploy -> Connect to GitHub -> Automatic deploys
     pick the branch you want to deploy
