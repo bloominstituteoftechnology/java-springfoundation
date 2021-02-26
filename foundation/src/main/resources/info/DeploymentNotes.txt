@@ -157,3 +157,33 @@ Back under Deploy -> Connect to GitHub -> Automatic deploys
 
 Next time you deploy to your chosen branch, Heroku will get automatically updated!
 
+****************************
+
+Problem:
+
+Heroku restarts your application once every 24 hours. It does this automatically; you have no control over it. This is a good thing and is similar to my mantra of restart your computer at least once a day!
+
+However, if you leave your code as originally deployed (with creating the database turned on seeddata active), when Heroku restarts your application, any data changes made in the last 24 hours get wiped out. So much for presient data.
+
+Solution:
+
+Deploy your application as normal using postgresql
+
+When you first deploy your application, in application.properties, you have the following set
+
+spring.jpa.hibernate.ddl-auto=create
+spring.datasource.initialization-mode=always
+
+And you may have a SeedData class.
+
+Make sure your application is running properly.
+
+Now add the following config vars to your Heroku app
+
+Config Var                            |  Value
+--------------------------------------|---------
+spring_jpa_hibernate_ddl-auto         |  update
+spring_datasource_initialization-mode |  never
+command_line_runner_enabled           |  false
+
+So, now when your application is restarted by Heroku, the values will be read from the config vars overriding what is in application.properties and so seed data is not active and you can keep your old data!
