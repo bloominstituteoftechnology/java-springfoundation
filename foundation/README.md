@@ -1,4 +1,4 @@
-# Java User Model Final Version / Exceptions Final Application / Security Initial Application
+# Foundation / Scaffolding for Build Week
 
 ## Introduction
 
