@@ -139,11 +139,21 @@ see: https://stackoverflow.com/questions/39197334/automated-heroku-deploy-from-s
 
 In the Web Interface of Heroku
 
-Under Deploy GitHub select repository (must have admin rights to repo)
+Under Deploy -> Connect to GitHub
+    select repository (must have admin rights to repo)
 
-Create a config var PROJECT_PATH = secured-restaurants-deployed
+Now under Settings -> Reveal Config Vars
+    Create a config var PROJECT_PATH = foundation
+        The subdirectory where your application lives. If the application lives at the root, skip this step.
+        The application lives in the folder where POM.XML file is.
 
-Under Settings BuildPack add https://github.com/timanovsky/subdir-heroku-buildpack.git. Move it to the top buildpack
+Under Settings -> BuildPack
+    add https://github.com/timanovsky/subdir-heroku-buildpack.git. Move it to the top buildpack
     You may wish to fork the subdir-heroku-buildpack to your own repositories
 
-Back under Deploy GitHub - pick the branch you want to deploy and enable automatic deploys
+Back under Deploy -> Connect to GitHub -> Automatic deploys
+    pick the branch you want to deploy
+    Click on enable automatic deploys
+
+Next time you deploy to your chosen branch, Heroku will get automatically updated!
+
