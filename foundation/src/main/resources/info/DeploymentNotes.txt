@@ -137,6 +137,8 @@ Password:  faf7655d32f2361fb57a5e9d96d1e38a11c532c1070960f49fb70bf080a3b409
 
 see: https://stackoverflow.com/questions/39197334/automated-heroku-deploy-from-subfolder
 
+In the root folder of your application you will find a Procfile. Change the name of your JAR file to match the application's name of Heroku application
+
 In the Web Interface of Heroku
 
 Under Deploy -> Connect to GitHub
