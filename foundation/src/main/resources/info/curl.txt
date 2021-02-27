@@ -1,0 +1,81 @@
+// admins access token = 6b132b88-7cbf-4d05-a3dd-8cbed30ec199
+// barnbarns access token = d8e5b03f-65e8-4685-a1bb-5c9bc81805f7
+
+// get admins access code
+curl -X POST --user "lambda-client:lambda-secret" -d "grant_type=password&username=admin&password=password" https://jrmmba-foundation.herokuapp.com/login
+
+// this works with admin
+curl -X GET -H "Accept: application/json" -H "Authorization: Bearer 6b132b88-7cbf-4d05-a3dd-8cbed30ec199" https://jrmmba-foundation.herokuapp.com/users/users
+
+// get users access code
+curl -X POST --user "lambda-client:lambda-secret" -d 'grant_type=password&username=barnbarn&password=ILuvM4th!' https://jrmmba-foundation.herokuapp.com/login
+
+// this has an authentication error
+curl -X GET -H "Accept: application/json" -H "Authorization: Bearer d8e5b03f-65e8-4685-a1bb-5c9bc81805f7" https://jrmmba-foundation.herokuapp.com/users/users
+
+// switch back to admins access code and this works
+curl -X GET -H "Accept: application/json" -H "Authorization: Bearer 6b132b88-7cbf-4d05-a3dd-8cbed30ec199" https://jrmmba-foundation.herokuapp.com/users/users
+
+// add snoopy as a user
+curl -X POST -H "Content-Type: application/json" -H "Authorization: Bearer 6b132b88-7cbf-4d05-a3dd-8cbed30ec199" -d "{\"username\":\"snoopy\",\"password\":\"password\",\"primaryemail\":\"snoopy@home.local\",\"roles\":[{\"role\":{\"roleid\":1}}]}" https://jrmmba-foundation.herokuapp.com/users/user
+
+// look up users and find snoopy's id
+curl -X GET -H "Accept: application/json" -H "Authorization: Bearer 6b132b88-7cbf-4d05-a3dd-8cbed30ec199" https://jrmmba-foundation.herokuapp.com/users/users
+
+// delete snoopy user
+curl -X DELETE -H "Authorization: Bearer 6b132b88-7cbf-4d05-a3dd-8cbed30ec199" https://jrmmba-foundation.herokuapp.com/users/user/16
+
+// verify that snoopy is deleted
+curl -X GET -H "Accept: application/json" -H "Authorization: Bearer 6b132b88-7cbf-4d05-a3dd-8cbed30ec199" https://jrmmba-foundation.herokuapp.com/users/user/16
+
+// add ginger a new user
+curl -X POST -H "Content-Type: application/json" -d "{\"username\":\"ginger\",\"password\":\"EATEAT\",\"primaryemail\":\"ginger@home.local\"}" https://jrmmba-foundation.herokuapp.com/createnewuser
+
+// look at all users and verify that ginger is available
+curl -X GET -H "Accept: application/json" -H "Authorization: Bearer 6b132b88-7cbf-4d05-a3dd-8cbed30ec199" https://jrmmba-foundation.herokuapp.com/users/users
+
+// revokes token for admin
+curl -X GET -H "Accept: application/json" -H "Authorization: Bearer 6b132b88-7cbf-4d05-a3dd-8cbed30ec199" https://jrmmba-foundation.herokuapp.com/oauth/revoke-token
+
+// this should fail with invalid token
+curl -X GET -H "Accept: application/json" -H "Authorization: Bearer 6b132b88-7cbf-4d05-a3dd-8cbed30ec199" https://jrmmba-foundation.herokuapp.com/users/users
+
+// get admins access code
+curl -X POST --user "lambda-client:lambda-secret" -d "grant_type=password&username=admin&password=password" https://jrmmba-foundation.herokuapp.com/login
+
+// new admin token 4a23f412-f22a-4397-9740-7c3680d7a95e
+// look at all users and ginger's id
+curl -X GET -H "Accept: application/json" -H "Authorization: Bearer 4a23f412-f22a-4397-9740-7c3680d7a95e" https://jrmmba-foundation.herokuapp.com/users/users
+
+// add email to ginger
+curl -X PATCH -H "Content-Type: application/json" -H "Authorization: Bearer 4a23f412-f22a-4397-9740-7c3680d7a95e" -d  "{ \"userid\": 17, \"useremails\": [ { \"useremail\": \"whisker@home.local\" } ] }" https://jrmmba-foundation.herokuapp.com/users/user/17
+
+// look at all users and ginger's emails
+curl -X GET -H "Accept: application/json" -H "Authorization: Bearer 4a23f412-f22a-4397-9740-7c3680d7a95e" https://jrmmba-foundation.herokuapp.com/users/users
+
+
+*****************************
+
+Adding Snoopy
+
+{
+    "username": "snoopy",
+    "password": "password",
+    "primaryemail": "snoopy@home.local",
+    "roles": [
+        {
+            "role": {
+                "roleid": 1
+            }
+        }
+    ]
+}
+
+
+Adding Ginger
+
+{
+    "username": "ginger",
+    "password": "EATEAT",
+    "primaryemail": "ginger@home.local"
+}
