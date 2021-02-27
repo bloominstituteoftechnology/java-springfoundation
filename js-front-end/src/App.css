@@ -1,0 +1,165 @@
+.App {
+  text-align: center;
+  width: 500px;
+  margin: 0 auto;
+}
+
+.App-header {
+  height: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 5%;
+  border-radius: 10px;
+  padding: 5%;
+}
+
+
+body, html {
+  background-color:#EBECF0;
+}
+
+body, p, input, select, textarea, button {
+    font-family: 'Montserrat', sans-serif;
+    letter-spacing: -0.2px;
+    font-size: 16px;
+}
+
+div, p {
+  color: #BABECC;
+  text-shadow: 1px 1px 1px #FFF;
+}
+
+
+.formContainer {
+  width: 50%;
+}
+
+form {
+  padding: 16px;
+  width: 16px*20;
+  margin: 0 auto;
+}
+
+.segment {
+  padding: 16px*2 0;
+  text-align: center;
+}
+
+button, input {
+  border: 0;
+  outline: 0;
+  font-size: 16px;
+  border-radius: 20px;
+  padding: 16px;
+  background-color:#EBECF0;
+  text-shadow: 1px 1px 0 #FFF;
+}
+
+label {
+  display: block;
+  margin-bottom: 16px*1.5;
+  width: 100%;
+  color: #61677C;
+}
+
+input, .role{
+  margin-right: 16px/2;
+  box-shadow:  inset 2px 2px 5px #BABECC, inset -5px -5px 10px #FFF;
+  width: 100%;
+  box-sizing: border-box;
+  transition: all 0.2s ease-in-out;
+  /* appearance: none; */
+}
+input:focus {
+  box-shadow:  inset 1px 1px 2px #BABECC, inset -1px -1px 2px #FFF;
+}
+
+
+.cardContainer {
+  display: flex;
+  width: 100%;
+  width: 100%;
+  flex-wrap: wrap;
+  text-shadow: 1px 1px 1px #021c3a;
+  justify-content: center;
+}
+
+.userCard {
+  color:#61677C;
+  font-weight: bold;
+  box-shadow: -5px -5px 20px #FFF,  5px 5px 20px #BABECC;
+  transition: all 0.2s ease-in-out;
+  cursor: pointer;
+  font-weight: 600;
+  width: 35%;
+  padding: 10%;
+  margin: 2%;
+  border-radius: 20px;
+  text-align: center;
+}
+
+.userCard:hover {
+  box-shadow: -2px -2px 5px #FFF, 2px 2px 5px #BABECC;
+}
+
+button {
+  color:#61677C;
+  font-weight: bold;
+  box-shadow: -5px -5px 20px #FFF,  5px 5px 20px #BABECC;
+  transition: all 0.2s ease-in-out;
+  cursor: pointer;
+  font-weight: 600;
+  justify-self: center;
+  align-items: center;
+  justify-content: center;
+  justify-items: center;
+}
+button:hover {
+    box-shadow: -2px -2px 5px #FFF, 2px 2px 5px #BABECC;
+  }
+  
+button:enabled {
+  color:#AE1100;
+}
+
+button:disabled {
+  box-shadow: inset 1px 1px 2px #BABECC, inset -1px -1px 2px #FFF;
+  color: #EBECF0;
+}
+
+button.red{
+    display: block;
+    width: 100%;
+  }
+
+h1 {
+  font-size: 70px;
+  text-shadow: inset 3px 3px 5px #BABECC, inset -3px -3px 5px #FFF;
+}
+
+h2, h1 {
+  color:#AE1100;
+}
+
+input.checkBox {
+  width: 15px;
+  border-radius: unset;
+}
+
+input.checkBox:disabled {
+  background: #BABECC;
+}
+  
+input.checkBox:enabled {
+  background: #AE1100;
+}
+
+  .role {
+border-radius: 20px;
+border: unset;
+width: 230px;
+height: 50px;
+background: #EBECF0;
+  }
