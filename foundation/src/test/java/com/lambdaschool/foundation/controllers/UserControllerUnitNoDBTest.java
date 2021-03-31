@@ -5,7 +5,6 @@ import com.lambdaschool.foundation.FoundationApplicationTesting;
 import com.lambdaschool.foundation.models.Role;
 import com.lambdaschool.foundation.models.User;
 import com.lambdaschool.foundation.models.UserRoles;
-import com.lambdaschool.foundation.models.Useremail;
 import com.lambdaschool.foundation.services.UserService;
 import io.restassured.module.mockmvc.RestAssuredMockMvc;
 import org.junit.After;
@@ -74,7 +73,7 @@ public class UserControllerUnitNoDBTest
         r3.setRoleid(3);
 
         // admin, data, user
-        User u1 = new User("admin",
+        User u1 = new User("George","Hatzigeorgio",
             "ILuvM4th!",
             "admin@lambdaschool.test");
         u1.getRoles()

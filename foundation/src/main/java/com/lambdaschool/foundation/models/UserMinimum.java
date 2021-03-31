@@ -6,12 +6,11 @@ import javax.validation.constraints.Email;
  * A model used to create a new user. The minimum information needed to create a user.
  * Note the role will default to USER.
  */
-public class UserMinimum
-{
+public class UserMinimum {
     /**
      * The username (String)
      */
-    private String username;
+    private String firstname;
 
     /**
      * The user's password (String)
@@ -22,35 +21,53 @@ public class UserMinimum
      * The user's primary email address (String)
      */
     @Email
-    private String primaryemail;
+    private String email;
+
+
+    private String lastname;
+
+    public String getFirstname() {
+        return firstname;
+    }
+
+    public void setFirstname(String firstname) {
+        this.firstname = firstname;
+    }
+
+
+
+
+    public String getLastname() {
+        return lastname;
+    }
+
+
+
+
+
+    public void setLastname(String lastname) {
+        this.lastname = lastname;
+    }
 
     /**
      * Getter for the username
      *
      * @return the username (String) associated with this user
      */
-    public String getUsername()
-    {
-        return username;
-    }
+
 
     /**
      * Setter for the username
      *
      * @param username the new username (String) associated with this user
      */
-    public void setUsername(String username)
-    {
-        this.username = username;
-    }
 
     /**
      * Getter for the password of this user
      *
      * @return the password (String) for this user
      */
-    public String getPassword()
-    {
+    public String getPassword() {
         return password;
     }
 
@@ -60,8 +77,7 @@ public class UserMinimum
      *
      * @param password the new password (String in clear texts) for this user
      */
-    public void setPassword(String password)
-    {
+    public void setPassword(String password) {
         this.password = password;
     }
 
@@ -70,9 +86,8 @@ public class UserMinimum
      *
      * @return the email address (String) for this user
      */
-    public String getPrimaryemail()
-    {
-        return primaryemail;
+    public String getEmail() {
+        return email;
     }
 
     /**
@@ -80,8 +95,7 @@ public class UserMinimum
      *
      * @param primaryemail the new email address (String) for this user.
      */
-    public void setPrimaryemail(String primaryemail)
-    {
-        this.primaryemail = primaryemail;
+    public void setEmail(String email) {
+        this.email = email;
     }
 }

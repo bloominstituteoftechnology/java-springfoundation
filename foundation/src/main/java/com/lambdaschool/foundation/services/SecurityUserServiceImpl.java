@@ -43,7 +43,7 @@ public class SecurityUserServiceImpl
         {
             throw new ResourceNotFoundException("Invalid username or password.");
         }
-        return new org.springframework.security.core.userdetails.User(user.getUsername(),
+        return new org.springframework.security.core.userdetails.User(user.getEmail(),
             user.getPassword(),
             user.getAuthority());
     }

@@ -57,7 +57,7 @@ public class UserController
      */
     @GetMapping(value = "/user/{userId}",
         produces = "application/json")
-    public ResponseEntity<?> getUserById(
+    public ResponseEntity<?> getProductById(
         @PathVariable
             Long userId)
     {

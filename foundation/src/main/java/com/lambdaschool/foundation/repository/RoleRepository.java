@@ -27,13 +27,13 @@ public interface RoleRepository
      * @param roleid The primary key (long) of the role to change
      * @param name   The new name (String) of the role
      */
-    @Transactional
-    @Modifying
-    @Query(value = "UPDATE roles SET name = :name, lastmodifiedby = :uname, lastmodifieddate = CURRENT_TIMESTAMP WHERE roleid = :roleid",
+   @Transactional
+   @Modifying
+   @Query(value = "UPDATE roles SET name = :name, lastmodifiedby = :uname, lastmodifieddate = CURRENT_TIMESTAMP WHERE roleid = :roleid",
         nativeQuery = true)
-    void updateRoleName(
-        String uname,
-        long roleid,
-        String name);
+   void updateRoleName(
+       String uname,
+       long roleid,
+      String name);
 
 }
