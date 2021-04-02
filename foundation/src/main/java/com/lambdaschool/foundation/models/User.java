@@ -76,7 +76,7 @@ public class User
 
     @OneToMany(mappedBy = "user",cascade = CascadeType.ALL,orphanRemoval = true)
     @JsonIgnoreProperties(value = "user", allowSetters = true)
-    private Set<Product> products = new HashSet<>();
+    private Set<UserProduct> products = new HashSet<>();
 
     /**
      * Default constructor used primarily by the JPA.
@@ -125,11 +125,11 @@ public class User
         this.userid = userid;
     }
 
-    public Set<Product> getProducts() {
+    public Set<UserProduct> getProducts() {
         return products;
     }
 
-    public void setProducts(Set<Product> products) {
+    public void setProducts(Set<UserProduct> products) {
         this.products = products;
     }
 

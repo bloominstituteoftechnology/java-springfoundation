@@ -1,9 +1,10 @@
 package com.lambdaschool.foundation.models;
 
-import net.bytebuddy.dynamic.loading.InjectionClassLoader;
-import org.springframework.boot.autoconfigure.web.ResourceProperties;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "products")
@@ -15,19 +16,18 @@ public class Product {
     private long productid;
 
 
-@ManyToOne
-@JoinColumn(name="userid",nullable = false)
-private User user;
+@OneToMany(mappedBy="product",cascade = CascadeType.ALL,orphanRemoval = true)
+@JsonIgnoreProperties(value = "products")
+private Set<UserProduct> users = new HashSet<>();
 
 
 
     public Product() {
     }
 
-    public Product(String product, long productid, User user) {
+    public Product(String product ) {
         this.product = product;
-        this.productid = productid;
-        this.user = user;
+
     }
 
 
@@ -48,11 +48,11 @@ private User user;
         this.productid = productid;
     }
 
-    public User getUser() {
-        return user;
+    public Set<UserProduct> getUsers() {
+        return users;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setUsers(Set<UserProduct> userproducts) {
+        this.users = userproducts;
     }
 }

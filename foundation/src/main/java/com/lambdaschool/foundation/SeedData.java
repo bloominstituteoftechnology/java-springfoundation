@@ -3,10 +3,7 @@ package com.lambdaschool.foundation;
 import com.github.javafaker.Faker;
 import com.github.javafaker.service.FakeValuesService;
 import com.github.javafaker.service.RandomService;
-import com.lambdaschool.foundation.models.Product;
-import com.lambdaschool.foundation.models.Role;
-import com.lambdaschool.foundation.models.User;
-import com.lambdaschool.foundation.models.UserRoles;
+import com.lambdaschool.foundation.models.*;
 import com.lambdaschool.foundation.services.ProductService;
 import com.lambdaschool.foundation.services.RoleService;
 import com.lambdaschool.foundation.services.UserService;
@@ -67,14 +64,12 @@ public class SeedData
         roleService.deleteAll();
         Role r1 = new Role("owner");
         Role r2 = new Role("renter");
-        Product p1 = new Product("hpLaptop");
-        Product p2 = new Product("digital camera")
 
         r1 = roleService.save(r1);
         r2 = roleService.save(r2);
 
-        p1 = productService.save(p1);
-        p2 = productService.save(p2);
+
+
 
         // admin, data, user
         User u1 = new User("Johnnie","John","Malango",
@@ -85,11 +80,9 @@ public class SeedData
         u1.getRoles()
             .add(new UserRoles(u1,
                 r2));
-        u1.getProducts()
-                .add(new Product(u1,p1));
 
 
-        userService.save(u1);
+      u1 =  userService.save(u1);
 
         // data, user
         User u2 = new User("Marley","Marley","Copper",
@@ -98,13 +91,17 @@ public class SeedData
         u2.getRoles()
             .add(new UserRoles(u2,
                 r2));
-        u2.getProducts()
-                .add(new Product(u2,p2));
 
-        userService.save(u2);
+       u2 = userService.save(u2);
 
+        Product p1 = new Product("hp laptop");
+        Product p2 = new Product ("digital camera");
+        p1.getUsers().add(new UserProduct(u1,p1));
+       p1 = productService.save(p1);
+        p2.getUsers().add(new UserProduct(u2,p2));
+       p2 = productService.save(p2);
 
-            // using JavaFaker create a bunch of regular users
+        // using JavaFaker create a bunch of regular users
             // https://www.baeldung.com/java-faker
             // https://www.baeldung.com/regular-expressions-java
 

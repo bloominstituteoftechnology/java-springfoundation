@@ -12,6 +12,7 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
+@RequestMapping("/products")
 public class ProductController {
     @Autowired
     private ProductService productService;
@@ -23,7 +24,7 @@ public class ProductController {
         return new ResponseEntity<>(myProducts,
                 HttpStatus.OK);
     }
-    @GetMapping(value = "/products/{productId}",
+    @GetMapping(value = "/product/{productId}",
             produces = "application/json")
     public ResponseEntity<?> getProductById(
             @PathVariable
@@ -35,7 +36,7 @@ public class ProductController {
 
 
     }
-    @PutMapping(value = "/products/{productid}",
+    @PutMapping(value = "/product/{productid}",
             consumes = "application/json")
     public ResponseEntity<?> updateProduct(
             @Valid
@@ -50,8 +51,8 @@ public class ProductController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @DeleteMapping(value = "/products/{id}")
-    public ResponseEntity<?> deleteUserById(
+    @DeleteMapping(value = "/product/{id}")
+    public ResponseEntity<?> delete(
             @PathVariable
                     long id)
     {

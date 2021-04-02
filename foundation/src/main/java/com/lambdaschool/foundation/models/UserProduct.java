@@ -8,6 +8,7 @@ import java.util.Objects;
 
 @Entity
 @Table(name= "userproduct")
+@IdClass(UserProductId.class)
 public class UserProduct extends Auditable implements Serializable {
 
     @Id
@@ -58,7 +59,7 @@ public class UserProduct extends Auditable implements Serializable {
         }
         UserProduct that = (UserProduct) o;
         return ((this.user == null) ? 0 : this.user.getUserid()) == ((that.user == null) ? 0 : that.user.getUserid()) &&
-                ((this.product == null) ? 0 : this.product.getProductid()) == ((that.product == null) ? 0 : that.product.getRoleid());
+                ((this.product == null) ? 0 : this.product.getProductid()) == ((that.product == null) ? 0 : that.product.getProductid());
     }
 
     @Override
