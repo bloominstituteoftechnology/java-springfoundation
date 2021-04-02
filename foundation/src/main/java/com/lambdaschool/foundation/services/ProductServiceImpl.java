@@ -3,6 +3,7 @@ package com.lambdaschool.foundation.services;
 import com.lambdaschool.foundation.exceptions.ResourceNotFoundException;
 import com.lambdaschool.foundation.models.*;
 import com.lambdaschool.foundation.repository.ProductRepository;
+import com.lambdaschool.foundation.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,6 +23,9 @@ public class ProductServiceImpl implements ProductService {
 
     @Autowired
     private ProductService productService;
+
+    @Autowired
+    private UserRepository userrepos;
 
     @Override
     public Product save(Product product) {
@@ -66,13 +70,29 @@ public class ProductServiceImpl implements ProductService {
                 throw new EntityNotFoundException("product" + productid + "not found!");
             }
         }
-
+        @Transactional
         @Override
-        public Product update (Product updateProduct,long id){
-            return updateProduct;
+        public Product update (Product updateProduct,long productid) {
+            Product currentProduct = productrepos.findById(productid)
+                    .orElseThrow(() -> new EntityNotFoundException("Product"+ productid + "not found"));
+
+
+               currentProduct.setProduct(updateProduct.setProduct());
+
+
+            updateProduct.getUsers()
+                    .clear();
+            for (UserProduct up : updateProduct.getUsers()) {
+                User user = up.getUser();
+                user = userService.findUserById(user.getUserid());
+                updateProduct.getUsers()
+                        .add(new UserProduct(user,
+                                updateProduct));
+            }
+            return productrepos.save(currentProduct);
+
         }
-
-        @Override
+            @Override
         public List<Product> findAllProducts () {
             List<Product> list = new ArrayList<>();
             productrepos.findAll()

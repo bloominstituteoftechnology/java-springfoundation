@@ -7,7 +7,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Table(name = "products")
+@Table(name = "product")
 public class Product {
 
     private String product;
@@ -17,7 +17,7 @@ public class Product {
 
 
 @OneToMany(mappedBy="product",cascade = CascadeType.ALL,orphanRemoval = true)
-@JsonIgnoreProperties(value = "products")
+@JsonIgnoreProperties(value = "product")
 private Set<UserProduct> users = new HashSet<>();
 
 
@@ -55,4 +55,6 @@ private Set<UserProduct> users = new HashSet<>();
     public void setUsers(Set<UserProduct> userproducts) {
         this.users = userproducts;
     }
-}
+
+
+
