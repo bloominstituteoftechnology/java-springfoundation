@@ -38,27 +38,29 @@ public class User
     /**
      * The password (String) for this user. Cannot be null. Never get displayed
      */
+
+    /**
+     * Primary email account of user. Could be used as the userid. Cannot be null and must be unique.
+     */
+
+
+    @Column(nullable = false,unique = true)
+    private String firstname;
+
+    @Column(nullable = false,unique=true)
+    private String lastname;
+    
+    @Column(nullable = false,
+            unique = true)
+    @Email
+    private String email;
     @Column(nullable = false)
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String password;
 
     /**
-     * Primary email account of user. Could be used as the userid. Cannot be null and must be unique.
-     */
-    @Column(nullable = false,
-        unique = true)
-    @Email
-    private String primaryemail;
-
-    /**
      * A list of emails for this user
-     */
-    @OneToMany(mappedBy = "user",
-        cascade = CascadeType.ALL,
-        orphanRemoval = true)
-    @JsonIgnoreProperties(value = "user",
-        allowSetters = true)
-    private List<Useremail> useremails = new ArrayList<>();
+
 
     /**
      * Part of the join relationship between user and role
@@ -71,12 +73,28 @@ public class User
         allowSetters = true)
     private Set<UserRoles> roles = new HashSet<>();
 
+
+    @OneToMany(mappedBy = "user",cascade = CascadeType.ALL,orphanRemoval = true)
+    @JsonIgnoreProperties(value = "user", allowSetters = true)
+    private Set<UserProduct> products = new HashSet<>();
+
     /**
      * Default constructor used primarily by the JPA.
      */
     public User()
     {
     }
+
+    public User( String username,String firstname, String lastname, @Email String email, String password) {
+        this.setUsername(username);
+        this.firstname = firstname;
+        this.lastname = lastname;
+        this.email = email;
+        this.setPassword(password);
+
+    }
+
+
 
     /**
      * Given the params, create a new user object
@@ -86,86 +104,98 @@ public class User
      * @param username     The username (String) of the user
      * @param password     The password (String) of the user
      * @param primaryemail The primary email (String) of the user
-     */
-    public User(
-        String username,
-        String password,
-        String primaryemail)
-    {
-        setUsername(username);
-        setPassword(password);
-        this.primaryemail = primaryemail;
-    }
+
 
     /**
      * Getter for userid
      *
      * @return the userid (long) of the user
      */
-    public long getUserid()
-    {
-        return userid;
-    }
 
     /**
      * Setter for userid. Used primary for seeding data
      *
      * @param userid the new userid (long) of the user
      */
-    public void setUserid(long userid)
-    {
+    public long getUserid() {
+        return userid;
+    }
+
+    public void setUserid(long userid) {
         this.userid = userid;
     }
 
-    /**
+    public Set<UserProduct> getProducts() {
+        return products;
+    }
+
+    public void setProducts(Set<UserProduct> products) {
+        this.products = products;
+    }
+
+    public String getFirstname() {
+        return firstname;
+    }
+
+    public void setFirstname(String firstname) {
+        this.firstname = firstname;
+    }
+
+    public String getLastname() {
+        return lastname;
+    }
+
+    public void setLastname(String lastname) {
+        this.lastname = lastname;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+/**
      * Getter for username
      *
      * @return the username (String) lowercase
-     */
-    public String getUsername()
-    {
-        return username;
-    }
 
     /**
      * setter for username
      *
      * @param username the new username (String) converted to lowercase
      */
-    public void setUsername(String username)
-    {
-        this.username = username.toLowerCase();
-    }
 
     /**
      * getter for primary email
      *
      * @return the primary email (String) for the user converted to lowercase
      */
-    public String getPrimaryemail()
-    {
-        return primaryemail;
-    }
 
     /**
      * setter for primary email
      *
      * @param primaryemail the new primary email (String) for the user converted to lowercase
      */
-    public void setPrimaryemail(String primaryemail)
-    {
-        this.primaryemail = primaryemail.toLowerCase();
-    }
 
     /**
      * Getter for the password
      *
      * @return the password (String) of the user
      */
-    public String getPassword()
-    {
-        return password;
-    }
 
     /**
      * Setter for password to be used internally, after the password has already been encrypted
@@ -186,25 +216,17 @@ public class User
         this.password = passwordEncoder.encode(password);
     }
 
-    /**
+/**
      * Getter for the list of useremails for this user
      *
      * @return the list of useremails (List(Useremail)) for this user
      */
-    public List<Useremail> getUseremails()
-    {
-        return useremails;
-    }
 
     /**
      * Setter for list of useremails for this user
      *
      * @param useremails the new list of useremails (List(Useremail)) for this user
      */
-    public void setUseremails(List<Useremail> useremails)
-    {
-        this.useremails = useremails;
-    }
 
     /**
      * Getter for user role combinations

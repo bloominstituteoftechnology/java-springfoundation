@@ -117,8 +117,8 @@ public class UserRoles
             return false;
         }
         UserRoles that = (UserRoles) o;
-        return ((user == null) ? 0 : user.getUserid()) == ((that.user == null) ? 0 : that.user.getUserid()) &&
-            ((role == null) ? 0 : role.getRoleid()) == ((that.role == null) ? 0 : that.role.getRoleid());
+        return ((this.user == null) ? 0 : this.user.getUserid()) == ((that.user == null) ? 0 : that.user.getUserid()) &&
+            ((this.role == null) ? 0 : this.role.getRoleid()) == ((that.role == null) ? 0 : that.role.getRoleid());
     }
 
     @Override

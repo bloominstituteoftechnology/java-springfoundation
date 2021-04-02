@@ -4,7 +4,6 @@ import com.lambdaschool.foundation.exceptions.ResourceNotFoundException;
 import com.lambdaschool.foundation.models.Role;
 import com.lambdaschool.foundation.models.User;
 import com.lambdaschool.foundation.models.UserRoles;
-import com.lambdaschool.foundation.models.Useremail;
 import com.lambdaschool.foundation.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.oauth2.client.resource.OAuth2AccessDeniedException;
@@ -77,7 +76,7 @@ public class UserServiceImpl
     @Override
     public User findByName(String name)
     {
-        User uu = userrepos.findByUsername(name.toLowerCase());
+        User uu = userrepos.findByEmail(name.toLowerCase());
         if (uu == null)
         {
             throw new ResourceNotFoundException("User name " + name + " not found!");
@@ -97,12 +96,12 @@ public class UserServiceImpl
                 .orElseThrow(() -> new ResourceNotFoundException("User id " + user.getUserid() + " not found!"));
             newUser.setUserid(user.getUserid());
         }
-
-        newUser.setUsername(user.getUsername()
-            .toLowerCase());
+        newUser.setFirstname(user.getFirstname());
+        newUser.setLastname(user.getLastname());
         newUser.setPasswordNoEncrypt(user.getPassword());
-        newUser.setPrimaryemail(user.getPrimaryemail()
-            .toLowerCase());
+        newUser.setEmail(user.getEmail());
+        newUser.setUsername(user.getUsername());
+
 
         newUser.getRoles()
             .clear();
@@ -115,14 +114,6 @@ public class UserServiceImpl
                     addRole));
         }
 
-        newUser.getUseremails()
-            .clear();
-        for (Useremail ue : user.getUseremails())
-        {
-            newUser.getUseremails()
-                .add(new Useremail(newUser,
-                    ue.getUseremail()));
-        }
 
         return userrepos.save(newUser);
     }
@@ -135,11 +126,11 @@ public class UserServiceImpl
     {
         User currentUser = findUserById(id);
 
-        if (helperFunctions.isAuthorizedToMakeChange(currentUser.getUsername()))
+        if (helperFunctions.isAuthorizedToMakeChange(currentUser.getEmail()))
         {
-            if (user.getUsername() != null)
+            if (user.getEmail() != null)
             {
-                currentUser.setUsername(user.getUsername()
+                currentUser.setEmail(user.getEmail()
                     .toLowerCase());
             }
 
@@ -148,11 +139,6 @@ public class UserServiceImpl
                 currentUser.setPasswordNoEncrypt(user.getPassword());
             }
 
-            if (user.getPrimaryemail() != null)
-            {
-                currentUser.setPrimaryemail(user.getPrimaryemail()
-                    .toLowerCase());
-            }
 
             if (user.getRoles()
                 .size() > 0)
@@ -170,18 +156,6 @@ public class UserServiceImpl
                 }
             }
 
-            if (user.getUseremails()
-                .size() > 0)
-            {
-                currentUser.getUseremails()
-                    .clear();
-                for (Useremail ue : user.getUseremails())
-                {
-                    currentUser.getUseremails()
-                        .add(new Useremail(currentUser,
-                            ue.getUseremail()));
-                }
-            }
 
             return userrepos.save(currentUser);
         } else

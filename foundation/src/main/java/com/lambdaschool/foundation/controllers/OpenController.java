@@ -53,7 +53,7 @@ public class OpenController
      * @return The token access and other relevent data to token access. Status of CREATED. The location header to look up the new user.
      * @throws URISyntaxException we create some URIs during this method. If anything goes wrong with that creation, an exception is thrown.
      */
-    @PostMapping(value = "/createnewuser",
+    @PostMapping(value = "/users/register",
         consumes = {"application/json"},
         produces = {"application/json"})
     public ResponseEntity<?> addSelf(
@@ -66,15 +66,16 @@ public class OpenController
     {
         // Create the user
         User newuser = new User();
-
-        newuser.setUsername(newminuser.getUsername());
+        newuser.setFirstname(newminuser.getFirstname());
+        newuser.setLastname((newminuser.getLastname()));
+        newuser.setEmail(newminuser.getEmail());
         newuser.setPassword(newminuser.getPassword());
-        newuser.setPrimaryemail(newminuser.getPrimaryemail());
+
 
         // add the default role of user
         Set<UserRoles> newRoles = new HashSet<>();
         newRoles.add(new UserRoles(newuser,
-            roleService.findByName("user")));
+            roleService.findByName("renter")));
         newuser.setRoles(newRoles);
 
         newuser = userService.save(newuser);
@@ -107,7 +108,7 @@ public class OpenController
         map.add("scope",
             "read write trust");
         map.add("username",
-            newminuser.getUsername());
+            newminuser.getEmail());
         map.add("password",
             newminuser.getPassword());
 

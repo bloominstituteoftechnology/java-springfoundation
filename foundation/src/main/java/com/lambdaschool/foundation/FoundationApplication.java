@@ -12,7 +12,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
  */
 @EnableJpaAuditing
 @SpringBootApplication
-@PropertySource(value = "file:/Users/lambdajohn/foundationconf.properties", ignoreResourceNotFound = true)
+//@PropertySource(value = "file:/Users/lambdajohn/foundationconf.properties", ignoreResourceNotFound = true)
 public class FoundationApplication
 {
     /**

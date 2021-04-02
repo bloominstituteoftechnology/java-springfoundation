@@ -38,12 +38,12 @@ public class SecurityUserServiceImpl
         throws
         ResourceNotFoundException
     {
-        User user = userrepos.findByUsername(s.toLowerCase());
+        User user = userrepos.findByUsername(s);
         if (user == null)
         {
             throw new ResourceNotFoundException("Invalid username or password.");
         }
-        return new org.springframework.security.core.userdetails.User(user.getUsername(),
+        return new org.springframework.security.core.userdetails.User(user.getEmail(),
             user.getPassword(),
             user.getAuthority());
     }

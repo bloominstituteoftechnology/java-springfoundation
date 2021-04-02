@@ -79,8 +79,8 @@ public class UserRolesId
             return false;
         }
         UserRolesId that = (UserRolesId) o;
-        return user == that.user &&
-            role == that.role;
+        return this.user == that.user &&
+            this.role == that.role;
     }
 
     @Override

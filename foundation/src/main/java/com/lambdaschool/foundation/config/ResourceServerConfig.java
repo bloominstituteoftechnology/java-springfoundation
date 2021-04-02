@@ -51,26 +51,23 @@ public class ResourceServerConfig
                 "/swagger-ui.html",
                 "/v2/api-docs",
                 "/webjars/**",
-                "/createnewuser")
+                "/createnewuser",
+                    "/users/login/"
+                    )
             .permitAll()
-            .antMatchers(HttpMethod.POST,
-                "/users/**")
-            .hasAnyRole("ADMIN")
             .antMatchers(HttpMethod.DELETE,
                 "/users/**")
             .hasAnyRole("ADMIN")
             .antMatchers(HttpMethod.PUT,
                 "/users/**")
             .hasAnyRole("ADMIN")
-            .antMatchers("/users/**",
+            .antMatchers(
                 "/useremails/**",
                 "/oauth/revoke-token",
                 "/logout")
             .authenticated()
             .antMatchers("/roles/**")
             .hasAnyRole("ADMIN")
-            .anyRequest()
-            .denyAll()
             .and()
             .exceptionHandling()
             .accessDeniedHandler(new OAuth2AccessDeniedHandler());
