@@ -12,19 +12,25 @@ public class Product {
     private String product;
     @Id
     @GeneratedValue (strategy = GenerationType.AUTO)
-    private String productid;
+    private long productid;
 
 
+@ManyToOne
+@JoinColumn(name="userid",nullable = false)
+private User user;
 
 
 
     public Product() {
     }
 
-    public Product(String product, String productid) {
+    public Product(String product, long productid, User user) {
         this.product = product;
         this.productid = productid;
+        this.user = user;
     }
+
+
 
     public String getProduct() {
         return product;
@@ -34,11 +40,19 @@ public class Product {
         this.product = product;
     }
 
-    public String getProductid() {
+    public long getProductid() {
         return productid;
     }
 
-    public void setProductid(String productid) {
+    public void setProductid(long productid) {
         this.productid = productid;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }

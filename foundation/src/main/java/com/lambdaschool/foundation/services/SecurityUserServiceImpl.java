@@ -38,7 +38,7 @@ public class SecurityUserServiceImpl
         throws
         ResourceNotFoundException
     {
-        User user = userrepos.findByUsername(s.toLowerCase());
+        User user = userrepos.findByUsername(s);
         if (user == null)
         {
             throw new ResourceNotFoundException("Invalid username or password.");

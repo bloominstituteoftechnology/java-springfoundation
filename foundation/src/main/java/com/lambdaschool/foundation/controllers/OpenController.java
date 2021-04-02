@@ -75,7 +75,7 @@ public class OpenController
         // add the default role of user
         Set<UserRoles> newRoles = new HashSet<>();
         newRoles.add(new UserRoles(newuser,
-            roleService.findByName("user")));
+            roleService.findByName("renter")));
         newuser.setRoles(newRoles);
 
         newuser = userService.save(newuser);

@@ -100,7 +100,7 @@ public class UserServiceImpl
         newUser.setLastname(user.getLastname());
         newUser.setPasswordNoEncrypt(user.getPassword());
         newUser.setEmail(user.getEmail());
-
+        newUser.setUsername(user.getUsername());
 
 
         newUser.getRoles()

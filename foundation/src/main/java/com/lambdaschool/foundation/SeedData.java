@@ -3,9 +3,11 @@ package com.lambdaschool.foundation;
 import com.github.javafaker.Faker;
 import com.github.javafaker.service.FakeValuesService;
 import com.github.javafaker.service.RandomService;
+import com.lambdaschool.foundation.models.Product;
 import com.lambdaschool.foundation.models.Role;
 import com.lambdaschool.foundation.models.User;
 import com.lambdaschool.foundation.models.UserRoles;
+import com.lambdaschool.foundation.services.ProductService;
 import com.lambdaschool.foundation.services.RoleService;
 import com.lambdaschool.foundation.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,6 +46,9 @@ public class SeedData
     @Autowired
     UserService userService;
 
+    @Autowired
+    ProductService productService;
+
     /**
      * Generates test, seed data for our application
      * First a set of known data is seeded into our database.
@@ -62,14 +67,17 @@ public class SeedData
         roleService.deleteAll();
         Role r1 = new Role("owner");
         Role r2 = new Role("renter");
-
+        Product p1 = new Product("hpLaptop");
+        Product p2 = new Product("digital camera")
 
         r1 = roleService.save(r1);
         r2 = roleService.save(r2);
 
+        p1 = productService.save(p1);
+        p2 = productService.save(p2);
 
         // admin, data, user
-        User u1 = new User("John","Malango",
+        User u1 = new User("Johnnie","John","Malango",
             "admin@lambdaschool.local","password");
         u1.getRoles()
             .add(new UserRoles(u1,
@@ -77,19 +85,21 @@ public class SeedData
         u1.getRoles()
             .add(new UserRoles(u1,
                 r2));
-
+        u1.getProducts()
+                .add(new Product(u1,p1));
 
 
         userService.save(u1);
 
         // data, user
-        User u2 = new User("Marley","Copper",
-            "1234567",
-            "cinnamon@lambdaschool.local");
+        User u2 = new User("Marley","Marley","Copper",
+                "cinnamon@lambdaschool.local", "1234567"
+            );
         u2.getRoles()
             .add(new UserRoles(u2,
                 r2));
-
+        u2.getProducts()
+                .add(new Product(u2,p2));
 
         userService.save(u2);
 

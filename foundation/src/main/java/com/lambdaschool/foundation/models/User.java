@@ -85,17 +85,16 @@ public class User
     {
     }
 
-    public User( String firstname, String lastname, @Email String email, String password, Set<UserRoles> roles, Set<Product> products) {
+    public User( String username,String firstname, String lastname, @Email String email, String password) {
+        this.setUsername(username);
         this.firstname = firstname;
         this.lastname = lastname;
         this.email = email;
-        this.password = password;
+        this.setPassword(password);
 
     }
 
-    public User(String firstname, String lastname, String email, String password) {
-        super();
-    }
+
 
     /**
      * Given the params, create a new user object
@@ -162,7 +161,14 @@ public class User
         return password;
     }
 
-    /**
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+/**
      * Getter for username
      *
      * @return the username (String) lowercase
