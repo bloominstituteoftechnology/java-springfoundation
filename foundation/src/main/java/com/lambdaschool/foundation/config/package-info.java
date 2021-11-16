@@ -4,6 +4,6 @@
  * Also see:<br>
  * application.properties.
  *
- * @author John Mitchell (john@lambdaschool.com) with Lambda School unless otherwise noted.
+ * @author John Mitchell (john@bloomtech.com) with BloomTech unless otherwise noted.
  */
 package com.lambdaschool.foundation.config;

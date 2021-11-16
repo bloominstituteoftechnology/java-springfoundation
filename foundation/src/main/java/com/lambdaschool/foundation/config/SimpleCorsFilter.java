@@ -36,7 +36,7 @@ public class SimpleCorsFilter
 
         // white list domains that can access this API. * says let everyone access it. To restrict access use something like
         //                 response.setHeader("Access-Control-Allow-Origin",
-        //            "https://lambdaschool.com/");
+        //            "https://bloomtech.com/");
         response.setHeader("Access-Control-Allow-Origin",
             "*");
 

@@ -8,6 +8,6 @@ public class ResourceNotFoundException
 {
     public ResourceNotFoundException(String message)
     {
-        super("Error from a Lambda School Application " + message);
+        super("Error from a BloomTech Application " + message);
     }
 }

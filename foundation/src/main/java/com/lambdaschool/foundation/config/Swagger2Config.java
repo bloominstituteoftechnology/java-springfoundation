@@ -48,10 +48,10 @@ public class Swagger2Config
         return new ApiInfoBuilder().title("User Model Example")
             .description("User Model Example")
             .contact(new Contact("John Mitchell",
-                "http://www.lambdaschool.com",
-                "john@lambdaschool.com"))
+                "http://www.bloomtech.com",
+                "john@bloomtech.com"))
             .license("MIT")
-            .licenseUrl("https://github.com/LambdaSchool/java-usermodel/blob/master/LICENSE")
+            .licenseUrl("https://github.com/BloomInstituteOfTechnology/java-usermodel/blob/master/LICENSE")
             .version("1.0.0")
             .build();
     }

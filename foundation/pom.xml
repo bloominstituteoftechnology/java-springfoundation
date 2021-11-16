@@ -12,7 +12,7 @@
     <artifactId>foundation</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>usermodel</name>
-    <description>Scaffolding App for Lambda School Build Week</description>
+    <description>Scaffolding App for BloomTech Build Week</description>
 
     <properties>
         <java.version>11</java.version>
